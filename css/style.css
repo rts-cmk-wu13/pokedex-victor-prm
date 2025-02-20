@@ -1,8 +1,11 @@
-@import url("text-styles.css");
+@font-face {
+    font-family: Poppins;
+    src: url(../assets/Poppins/Poppins-Regular.ttf);
+}
 
 @font-face {
-    font-family: Roboto_Reg;
-    src: url(../fonts/Roboto-Regular-Variable.ttf);
+    font-family: Poppins_Bold;
+    src: url(../assets/Poppins/Poppins-Bold.ttf);
 }
 
 *,
@@ -56,6 +59,15 @@
     --black-tint-000: color-mix(in srgb, var(--gray-000) 20%, transparent);
     --shadow-2dp: 0 1px 3px 1px var(--black-tint-000);
     --shadow-6dp: 0 3px 12px 3px var(--black-tint-000);
+
+    --text-headline: 1.5rem/2rem Poppins_Bold,Arial,Helvetica,sans-serif;
+    --text-subtitle-1: 0.875rem/1rem Poppins_Bold,Arial,Helvetica,sans-serif;
+    --text-subtitle-2: 0.75rem/1rem Poppins_Bold,Arial,Helvetica,sans-serif;
+    --text-subtitle-3: 0.625rem/1rem Poppins_Bold,Arial,Helvetica,sans-serif;
+    --text-body-1: 0.875rem/1rem Poppins,Arial,Helvetica,sans-serif;
+    --text-body-2: 0.75rem/1rem Poppins,Arial,Helvetica,sans-serif;
+    --text-body-3: 0.625rem/1rem Poppins,Arial,Helvetica,sans-serif;
+    --text-caption: 0.5rem/0.75rem Poppins,Arial,Helvetica,sans-serif;
 }
 
 &&::-webkit-scrollbar {
@@ -63,7 +75,7 @@
 }
 
 body {
-    font-family: Helvetica, Arial, sans-serif;
+    font-family: Poppins,Arial,Helvetica,sans-serif;
     -ms-overflow-style: none;
     scrollbar-width: none;
 
@@ -76,6 +88,10 @@ body {
     flex-direction: column;
 }
 
+.headline{
+    font: var(--text-body);
+}
+
 .fxrow {
     display: flex;
     flex-direction: row;
@@ -86,14 +102,6 @@ body {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
     gap: var(--spacing-reg);
-}
-
-.dropshadow-2dp{
-
-}
-
-.dropshadow-6dp{
-    box-shadow: 0 3px 12px 3;
 }
 
 @media only screen and (max-width: 40rem) {}
