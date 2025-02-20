@@ -1,0 +1,46 @@
+/* TEXT STYLES */
+
+.headline{
+    font-size: 1.5rem;
+    line-height: 2rem;
+    font-weight: 800;
+}
+
+.subtitle-1{
+    font-size: 0.875rem;
+    line-height: 1rem;
+    font-weight: 800;
+}
+
+.subtitle-2{
+    font-size: 0.75rem;
+    line-height: 1rem;
+    font-weight: 800;
+}
+
+.subtitle-3{
+    font-size: 0.625rem;
+    line-height: 1rem;
+    font-weight: 800;
+}
+
+.body-1{
+    font-size: 0.875rem;
+    line-height: 1rem;
+}
+
+.body-2{
+    font-size: 0.75rem;
+    line-height: 1rem;
+}
+
+.body-3{
+    font-size: 0.625rem;
+    line-height: 1rem;
+}
+
+.caption{
+    font-size: 0.5rem;
+    line-height: 0.75rem;
+}
+

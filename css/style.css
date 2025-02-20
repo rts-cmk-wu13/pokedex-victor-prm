@@ -1,0 +1,99 @@
+@import url("text-styles.css");
+
+@font-face {
+    font-family: Roboto_Reg;
+    src: url(../fonts/Roboto-Regular-Variable.ttf);
+}
+
+*,
+*::before,
+*::after {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --max-width-content: 70rem;
+    --max-width-page: 80rem;
+    --spacing-reg: 1rem;
+    --spacing-dbl: calc(var(--spacing-reg)*2);
+    --spacing-hlf: calc(var(--spacing-reg)/2);
+    --spacing-qtr: calc(var(--spacing-reg)/4);
+
+    --gray-000: #000000;
+    --gray-100: #1a1a1a;
+    --gray-200: #333333;
+    --gray-300: #4d4d4d;
+    --gray-400: #666666;
+    --gray-500: #7f7f7f;
+    --gray-600: #999999;
+    --gray-700: #b3b3b3;
+    --gray-800: #cccccc;
+    --gray-900: #e5e5e5;
+    --gray-1000: #ffffff;
+
+    --color-primary: #DC0A2D;
+    --color-bug: #A7B723;
+    --color-dark: #75574C;
+    --color-dragon: #A7B723;
+    --color-electric: #F9CF30;
+    --color-fairy: #E69EAC;
+    --color-fighting: #C12239;
+    --color-fire: #F57D31;
+    --color-flying: #A891EC;
+    --color-ghost: #70559B;
+    --color-normal: #AAA67F;
+    --color-grass: #74CB48;
+    --color-ground: #DEC16B;
+    --color-ice: #9AD6DF;
+    --color-poison: #A43E9E;
+    --color-psychic: #FB5584;
+    --color-rock: #B69E31;
+    --color-steel: #B7B9D0;
+    --color-water: #6493EB;
+
+    --black-tint-000: color-mix(in srgb, var(--gray-000) 20%, transparent);
+    --shadow-2dp: 0 1px 3px 1px var(--black-tint-000);
+    --shadow-6dp: 0 3px 12px 3px var(--black-tint-000);
+}
+
+&&::-webkit-scrollbar {
+    display: none;
+}
+
+body {
+    font-family: Helvetica, Arial, sans-serif;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+
+    max-width: var(--max-width-page);
+    margin: 0 auto;
+}
+
+.fxcol {
+    display: flex;
+    flex-direction: column;
+}
+
+.fxrow {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+}
+
+.standard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+    gap: var(--spacing-reg);
+}
+
+.dropshadow-2dp{
+
+}
+
+.dropshadow-6dp{
+    box-shadow: 0 3px 12px 3;
+}
+
+@media only screen and (max-width: 40rem) {}
