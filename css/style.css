@@ -71,6 +71,8 @@
     --text-body-2: 0.75rem/1rem Poppins, Arial, Helvetica, sans-serif;
     --text-body-3: 0.625rem/1rem Poppins, Arial, Helvetica, sans-serif;
     --text-caption: 0.5rem/0.75rem Poppins, Arial, Helvetica, sans-serif;
+
+    --grid-item-size: 6rem;
 }
 
 &&::-webkit-scrollbar {
@@ -84,6 +86,16 @@ body {
 
     max-width: var(--max-width-page);
     margin: 0 auto;
+    background-color: var(--color-primary);
+}
+
+main{
+    padding: var(--spacing-reg);
+    margin: var(--spacing-hlf);
+    background-color: var(--gray-1000);
+    border-radius: var(--spacing-hlf);
+    box-shadow: inset var(--shadow-2dp);
+    min-height: 80dvh;
 }
 
 .fxcol {
@@ -103,7 +115,7 @@ body {
 
 .standard-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(6rem, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(var(--grid-item-size), 1fr));
     gap: var(--spacing-reg);
 }
 
@@ -183,8 +195,10 @@ img[src*="svg"] {
 
 .pokemon-card {
     display: grid;
+    background-color: var(--gray-1000);
     border-radius: var(--spacing-hlf);
     box-shadow: var(--shadow-2dp);
+    height: var(--grid-item-size);
 }
 
 .pokemon-card>* {

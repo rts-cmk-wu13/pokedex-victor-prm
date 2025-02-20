@@ -7,7 +7,7 @@ rootElm.append(headerElm, mainElm)
 headerElm.innerHTML += createHeader();
 
 function fetchPokemon() {
-    fetch('https://pokeapi.co/api/v2/pokemon?limit=3')
+    fetch('https://pokeapi.co/api/v2/pokemon?limit=151')
         .then(response => response.json())
         .then(function (allpokemon) {
             allpokemon.results.forEach(function (pokemon) {
