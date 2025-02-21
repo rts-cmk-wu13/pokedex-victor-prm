@@ -96,6 +96,8 @@ main {
     border-radius: var(--spacing-hlf);
     box-shadow: inset var(--shadow-2dp);
     min-height: 80dvh;
+
+    
 }
 
 .fxcol {
@@ -121,7 +123,7 @@ main {
 
 /*     HEADER     */
 
-header {
+.header-index {
     background-color: var(--color-primary);
     display: grid;
     padding: var(--spacing-reg) var(--spacing-hlf) var(--spacing-hlf);

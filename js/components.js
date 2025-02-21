@@ -13,7 +13,6 @@ function createHeader() {
 function createCard(pokeData) {
     let id = pokeData.id;
     let redirect = `./detail.html?id=${id}`;
-    console.log(id, redirect);
     let paddedNum = String(id).padStart(3, '0');
     let semiRandomID = id+pokeData.type[0];
 
@@ -61,4 +60,9 @@ function createSortItem(content) {
                 <input type="radio" id="${id}" name="sort-selection" value="${value}">
                 <label for="${id}">${content}</label>
             </div>`
+}
+
+function showLoader(bool) {
+    let modifier = "hidden"
+    bool ? loaderElm.classList.remove(modifier) : loaderElm.classList.add(modifier);
 }

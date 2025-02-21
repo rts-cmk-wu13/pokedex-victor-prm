@@ -1,6 +1,7 @@
 let allpokemon = [];
 let rootElm = document.querySelector(".content-wrapper");
 let headerElm = document.createElement("header");
+headerElm.classList.add("header-index");
 let mainElm = document.createElement("main");
 mainElm.classList.add("standard-grid");
 
@@ -49,12 +50,6 @@ function colorBackgroundType(selector, type) {
     function backToNormal(){
         selector.closest("div").style.backgroundColor =  'var(--gray-900)';
     }
-
-}
-
-function showLoader(bool) {
-    let modifier = "hidden"
-    bool ? loaderElm.classList.remove(modifier) : loaderElm.classList.add(modifier);
 }
 
 fetchPokemon();
