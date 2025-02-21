@@ -5,7 +5,7 @@ let mainElm = document.createElement("main");
 mainElm.classList.add("standard-grid");
 
 let loaderElm = document.createElement("div");
-loaderElm.classList.add("popover-overlay","fxrow");
+loaderElm.classList.add("popover-overlay", "fxrow");
 loaderElm.innerHTML = `<div class="loader"><img src="assets/svg/pokeball.svg" alt=""></div>`;
 
 rootElm.append(headerElm, loaderElm, mainElm)
@@ -39,7 +39,20 @@ function populateGrid(pokeArray) {
     });
 }
 
-function showLoader(bool){
+function colorBackgroundType(selector, type) {
+    selector.removeEventListener("mouseout", backToNormal);
+    
+    let color = `color-mix(in srgb, var(--color-${type}) 10%, transparent)`;
+    selector.closest("div").style.backgroundColor = color;
+    selector.addEventListener("mouseout", backToNormal);
+
+    function backToNormal(){
+        selector.closest("div").style.backgroundColor =  'var(--gray-900)';
+    }
+
+}
+
+function showLoader(bool) {
     let modifier = "hidden"
     bool ? loaderElm.classList.remove(modifier) : loaderElm.classList.add(modifier);
 }

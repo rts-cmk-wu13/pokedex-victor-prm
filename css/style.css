@@ -241,12 +241,15 @@ img[src*="svg"] {
     padding: var(--spacing-qtr) 0;
     align-self: end;
     border-radius: var(--spacing-hlf);
+
+    transition: background-color 0.66s
 }
 
 /*     CLICKABLE CARD     */
 
 .clickable-card {
     position: relative;
+
     a::before {
         content: "";
         position: absolute;
@@ -260,10 +263,11 @@ img[src*="svg"] {
     a:focus {
         box-shadow: none;
         outline: none;
+        /* Width and color values */
     }
 }
 
-.pokemon-card__hidden-link{
+.pokemon-card__hidden-link {
     text-decoration: none;
     color: inherit;
 }
@@ -300,11 +304,11 @@ img[src*="svg"] {
 }
 
 /*    DROPDOWN     */
-.search-bar__sort-container{
+.search-bar__sort-container {
     position: relative;
 }
 
-.search-bar__sort-dropdown-container{
+.search-bar__sort-dropdown-container {
     z-index: 10;
     margin-top: var(--spacing-hlf);
     position: absolute;
@@ -314,13 +318,13 @@ img[src*="svg"] {
     border-radius: var(--spacing-hlf);
 }
 
-.search-bar__sort-dropdown{
+.search-bar__sort-dropdown {
     padding: var(--spacing-reg);
     background-color: white;
     border-radius: var(--spacing-hlf);
 }
 
-.search-bar__sort-dropdown-item{
+.search-bar__sort-dropdown-item {
     display: inline-flex;
     align-items: center;
     font: var(--text-body-3);
@@ -331,16 +335,16 @@ img[src*="svg"] {
     }
 }
 
-button{
+button {
     cursor: pointer;
 }
 
-.dropdown-background{
+.dropdown-background {
     position: fixed;
     inset: 0;
 }
 
-.search-bar__sort-dropdown-title{
+.search-bar__sort-dropdown-title {
     color: var(--gray-1000);
     font: var(--text-subtitle-2);
     padding: var(--spacing-hlf) var(--spacing-reg);
