@@ -5,7 +5,7 @@ let mainElm = document.createElement("main");
 mainElm.classList.add("standard-grid");
 
 let loaderElm = document.createElement("div");
-loaderElm.classList.add("loader-overlay","fxrow");
+loaderElm.classList.add("popover-overlay","fxrow");
 loaderElm.innerHTML = `<div class="loader"><img src="assets/svg/pokeball.svg" alt=""></div>`;
 
 rootElm.append(headerElm, loaderElm, mainElm)

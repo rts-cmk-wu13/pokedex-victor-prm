@@ -19,7 +19,6 @@ function createCard(pokeData) {
     return `<article class="pokemon-card fxcol clickable-card">
                 <p class="pokemon-card__number">#${paddedNum}</p>
                 <div class="pokemon-card__overlay fxrow">
-                    <p>${id}</p>
                     <p class="pokemon-card__name"><a class="pokemon-card__hidden-link" href="${redirect}">${pokeData.name}</a></p>
                 </div>
                 <div class="pokemon-card__image-container fxrow">
@@ -37,5 +36,28 @@ function createSearchBar() {
 }
 
 function createSortMenu() {
-    return `<button class="search-bar__sort-button header-button"><img src="./assets/svg/sort.svg" alt=""></button>`
+    return `<div class="search-bar__sort-container">
+                <button class="search-bar__sort-button header-button"><img src="./assets/svg/sort.svg" alt="" popovertarget="dropdown-all" popovertargetaction="hide" onclick="console.log('click')"></button>
+                <div class="search-bar__sort-dropdown-all" popover id="dropdown-all">
+                    <div class="search-bar__sort-dropdown-container">
+                        <p class="search-bar__sort-dropdown-title">Sort By:</p>
+                        <div class="search-bar__sort-dropdown">
+                            <form action="">
+                                ${createSortItem("Number")}
+                                ${createSortItem("Letter")}
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>`
+}
+
+function createSortItem(content) {
+    console.log(content)
+    let id = content.toLowerCase();
+    let value = content.toUpperCase();
+    return `<div class="search-bar__sort-dropdown-item">
+                <input type="radio" id="${id}" name="sort-selection" value="${value}">
+                <label for="${id}">${content}</label>
+            </div>`
 }
