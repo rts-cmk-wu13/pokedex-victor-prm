@@ -124,7 +124,7 @@ main{
 header {
     background-color: var(--color-primary);
     display: grid;
-    padding: var(--spacing-reg);
+    padding: var(--spacing-reg) var(--spacing-hlf) var(--spacing-hlf);
     gap: var(--spacing-hlf);
 }
 
@@ -198,7 +198,7 @@ img[src*="svg"] {
     background-color: var(--gray-1000);
     border-radius: var(--spacing-hlf);
     box-shadow: var(--shadow-2dp);
-    height: var(--grid-item-size);
+    min-height: var(--grid-item-size);
 }
 
 .pokemon-card>* {
@@ -246,3 +246,44 @@ img[src*="svg"] {
 
 
 @media only screen and (max-width: 40rem) {}
+
+/*     LOADER     */
+.loader-overlay{
+    position: fixed;
+    inset: 0;
+    justify-content: center;
+    align-items: center;
+
+    background-color: color-mix(in srgb, var(--gray-1000) 20%, transparent);
+    backdrop-filter: blur(4px);
+}
+
+
+.loader {
+    width: 8rem;
+    height: 8rem;
+    -webkit-animation: spin 2s linear infinite; /* Safari */
+    animation: spin 2s linear infinite;
+   
+    img{
+        transform-origin: 0% 0%;
+        height: 100%;
+        width: 100%;
+        filter: var(--svg-primary);
+    }
+  }
+
+  .hidden{
+    display: none;
+  }
+  
+  /* Safari */
+  @-webkit-keyframes spin {
+    0% { -webkit-transform: rotate(0deg); }
+    100% { -webkit-transform: rotate(360deg); }
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }

@@ -19,7 +19,7 @@ function createCard(pokeData){
                     <p class="pokemon-card__name">${pokeData.name}</p>
                 </div>
                 <div class="pokemon-card__image-container fxrow">
-                    <img class="pokemon-card__image "src="${pokeData.sprites.other['official-artwork'].front_default}" alt="">
+                    <img class="pokemon-card__image "src="${pokeData.image}" alt="">
                 </div>
                 
             </article>`
