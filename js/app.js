@@ -1,3 +1,4 @@
+let allpokemon = [];
 let rootElm = document.querySelector(".content-wrapper");
 let headerElm = document.createElement("header");
 let mainElm = document.createElement("main");
@@ -7,14 +8,8 @@ let loaderElm = document.createElement("div");
 loaderElm.classList.add("loader-overlay","fxrow");
 loaderElm.innerHTML = `<div class="loader"><img src="assets/svg/pokeball.svg" alt=""></div>`;
 
-
-
 rootElm.append(headerElm, loaderElm, mainElm)
 headerElm.innerHTML += createHeader();
-
-
-let allpokemon = [];
-
 
 function sortArray() {
     allpokemon.sort((a, b) => a.id > b.id ? 1 : -1);
@@ -39,7 +34,7 @@ const fetchPokemon = () => {
     })
 };
 function populateGrid(pokeArray) {
-    pokeArray.forEach(pokemon => {
+    pokeArray.forEach((pokemon) => {
         mainElm.innerHTML += createCard(pokemon);
     });
 }

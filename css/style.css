@@ -89,7 +89,7 @@ body {
     background-color: var(--color-primary);
 }
 
-main{
+main {
     padding: var(--spacing-reg);
     margin: var(--spacing-hlf);
     background-color: var(--gray-1000);
@@ -141,23 +141,23 @@ header {
     width: 100%;
 }
 
-.search-bar-container{
- position: relative;
-   
+.search-bar-container {
+    position: relative;
+
 }
 
 .search-bar {
     padding: 0 var(--spacing-dbl);
 }
 
-.search-bar__delete-button{
+.search-bar__delete-button {
     position: absolute;
     width: 2rem;
     /* background-color: transparent; */
-   right: 0;
+    right: 0;
 }
 
-.search-bar__search-icon{
+.search-bar__search-icon {
     position: absolute;
     filter: var(--svg-primary);
     left: var(--spacing-hlf);
@@ -184,7 +184,7 @@ img[src*="svg"] {
     filter: var(--svg-white);
 }
 
-.header-button{
+.header-button {
     width: 2rem;
     display: flex;
     align-items: center;
@@ -243,12 +243,33 @@ img[src*="svg"] {
     border-radius: var(--spacing-hlf);
 }
 
+/*     CLICKABLE CARD     */
 
+.clickable-card {
+    a::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        /*  z-index: 1; */
+    }
+}
 
-@media only screen and (max-width: 40rem) {}
+.clickable-card:focus-within {
+    box-shadow: 0 0 0 1px blue;
+
+    a:focus {
+        box-shadow: none;
+        outline: none;
+    }
+}
+
+.pokemon-card__hidden-link{
+    text-decoration: none;
+    color: inherit;
+}
 
 /*     LOADER     */
-.loader-overlay{
+.loader-overlay {
     position: fixed;
     inset: 0;
     justify-content: center;
@@ -262,28 +283,42 @@ img[src*="svg"] {
 .loader {
     width: 8rem;
     height: 8rem;
-    -webkit-animation: spin 2s linear infinite; /* Safari */
+    -webkit-animation: spin 2s linear infinite;
+    /* Safari */
     animation: spin 2s linear infinite;
-   
-    img{
+
+    img {
         transform-origin: 0% 0%;
         height: 100%;
         width: 100%;
         filter: var(--svg-primary);
     }
-  }
+}
 
-  .hidden{
+.hidden {
     display: none;
-  }
-  
-  /* Safari */
-  @-webkit-keyframes spin {
-    0% { -webkit-transform: rotate(0deg); }
-    100% { -webkit-transform: rotate(360deg); }
-  }
-  
-  @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-  }
+}
+
+/* Safari */
+@-webkit-keyframes spin {
+    0% {
+        -webkit-transform: rotate(0deg);
+    }
+
+    100% {
+        -webkit-transform: rotate(360deg);
+    }
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/*     MEDIA QUERIES     */
+@media only screen and (max-width: 40rem) {}
