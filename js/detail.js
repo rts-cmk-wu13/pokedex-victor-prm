@@ -15,19 +15,26 @@ function populateDetail(pokemon) {
     let mainElm = document.createElement("main");
     mainElm.classList.add("detail-card");
 
-    headerElm.innerHTML =   `<div class="detail-top fxrow">
+    let currentPage = window.location.href.split('?')[0];
+    let previousLink = `${currentPage}?id=${pokemon.id - 1}`;
+    let nextLink = `${currentPage}?id=${pokemon.id + 1}`;
+
+    console.log(previousLink, nextLink)
+    
+
+    headerElm.innerHTML = `<div class="detail-top fxrow">
                                 <div class="detail-top__back-button">
-                                    <img src="./assets/svg/arrow_back.svg" alt="Back arrow icon">
+                                    <button class="header-button button-transparent" onclick="navigateToPage('index.html')"><img src="./assets/svg/arrow_back.svg" alt="Back arrow icon"></button>
                                 </div>
-                                <h1>${pokemon.name}</h1>
-                                <p>${padNumber(pokemon.id)}</p>
+                                <h1 class="detail-top__title">${pokemon.name}</h1>
+                                <p class="detail-top__number">#${padNumber(pokemon.id)}</p>
                             </div>
                             <div class="detail-navigation-arrows fxrow">
                                 <div class="detail-navigation-arrow__previous">
-                                    <img src="./assets/svg/chevron_left.svg" alt="Previous arrow icon">
+                                    <button class="header-button button-transparent" onclick="navigateToPage('${previousLink}')"><img src="./assets/svg/chevron_left.svg" alt="Previous arrow icon"></button>
                                 </div>
                                 <div class="detail-navigation-arrow__next">
-                                    <img src="./assets/svg/chevron_right.svg" alt="Next arrow icon">
+                                <button class="header-button button-transparent" onclick="navigateToPage('${nextLink}')"><img src="./assets/svg/chevron_right.svg" alt="Next arrow icon"></button>
                                 </div>
                             </div>
                             <div class="detail-image-container">

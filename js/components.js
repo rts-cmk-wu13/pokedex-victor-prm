@@ -29,7 +29,7 @@ function createSearchBar() {
     return `<div class="search-bar-container fxrow">
                 <img class="search-bar__search-icon" src="./assets/svg/search.svg" alt="Search Icon">
                 <input class="search-bar" type="search" name="" id="search-bar">
-                <button class="search-bar__delete-button header-button" onclick="clearSearchBar('search-bar')"><img src="./assets/svg/close.svg" alt=""></button>
+                <button class="search-bar__delete-button header-button button-transparent" onclick="clearSearchBar('search-bar')"><img src="./assets/svg/close.svg" alt=""></button>
             </div>`
 }
 

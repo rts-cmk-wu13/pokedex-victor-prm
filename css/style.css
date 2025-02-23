@@ -234,7 +234,7 @@ img[src*="svg"] {
     }
 }
 
-.search-bar__delete-button{
+.button-transparent{
     background-color: transparent;
     box-shadow: none
 }
@@ -262,7 +262,7 @@ img[src*="svg"] {
 }
 
 .pokemon-card__image {
-    width: 4rem;
+    width: 60%;
 }
 
 .pokemon-card__name {

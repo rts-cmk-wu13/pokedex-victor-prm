@@ -20,15 +20,17 @@ function clearSearchBar(id) {
     document.querySelector("#" + id).value = "";
 }
 
-function linkToID(id){
+function linkToID(id) {
     let redirect = `./detail.html?id=${id}`;
     return redirect;
 }
 
-function padNumber(id){
+function padNumber(id) {
     let paddedNum = String(id).padStart(3, '0');
     return paddedNum
 }
 
-
-
+function navigateToPage(page) {
+    console.log(page)
+    document.location.href = page;
+}
