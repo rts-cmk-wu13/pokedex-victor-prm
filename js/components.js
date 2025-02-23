@@ -12,14 +12,12 @@ function createHeader() {
 
 function createCard(pokeData) {
     let id = pokeData.id;
-    let redirect = `./detail.html?id=${id}`;
-    let paddedNum = String(id).padStart(3, '0');
     let semiRandomID = id+pokeData.type[0];
 
     return `<article class="pokemon-card fxcol clickable-card">
-                <p class="pokemon-card__number">#${paddedNum}</p>
+                <p class="pokemon-card__number">#${padNumber(id)}</p>
                 <div class="pokemon-card__overlay fxrow" id="${semiRandomID}">
-                    <p class="pokemon-card__name"><a class="pokemon-card__hidden-link" href="${redirect}" onmouseover="colorBackgroundType(this, '${pokeData.type[0]}')">${pokeData.name}</a></p>
+                    <p class="pokemon-card__name"><a class="pokemon-card__hidden-link" href="${linkToID(id)}" onmouseover="colorBackgroundType(this, '${pokeData.type[0]}')">${pokeData.name}</a></p>
                 </div>
                 <div class="pokemon-card__image-container fxrow">
                     <img class="pokemon-card__image "src="${pokeData.image}" alt="">

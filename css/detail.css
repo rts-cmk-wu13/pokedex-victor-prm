@@ -1,0 +1,147 @@
+@font-face {
+    font-family: Poppins;
+    src: url(../assets/Poppins/Poppins-Regular.ttf);
+}
+
+@font-face {
+    font-family: Poppins_Bold;
+    src: url(../assets/Poppins/Poppins-Bold.ttf);
+}
+
+*,
+*::before,
+*::after {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --max-width-content: 70rem;
+    --max-width-page: 80rem;
+    --spacing-reg: 1rem;
+    --spacing-dbl: calc(var(--spacing-reg)*2);
+    --spacing-hlf: calc(var(--spacing-reg)/2);
+    --spacing-qtr: calc(var(--spacing-reg)/4);
+
+    --gray-000: #000000;
+    --gray-100: #1a1a1a;
+    --gray-200: #333333;
+    --gray-300: #4d4d4d;
+    --gray-400: #666666;
+    --gray-500: #7f7f7f;
+    --gray-600: #999999;
+    --gray-700: #b3b3b3;
+    --gray-800: #cccccc;
+    --gray-900: #e5e5e5;
+    --gray-1000: #ffffff;
+
+    --color-primary: #DC0A2D;
+    --color-bug: #A7B723;
+    --color-dark: #75574C;
+    --color-dragon: #A7B723;
+    --color-electric: #F9CF30;
+    --color-fairy: #E69EAC;
+    --color-fighting: #C12239;
+    --color-fire: #F57D31;
+    --color-flying: #A891EC;
+    --color-ghost: #70559B;
+    --color-normal: #AAA67F;
+    --color-grass: #74CB48;
+    --color-ground: #DEC16B;
+    --color-ice: #9AD6DF;
+    --color-poison: #A43E9E;
+    --color-psychic: #FB5584;
+    --color-rock: #B69E31;
+    --color-steel: #B7B9D0;
+    --color-water: #6493EB;
+
+    --black-tint-000: color-mix(in srgb, var(--gray-000) 20%, transparent);
+    --shadow-2dp: 0 1px 3px 1px var(--black-tint-000);
+    --shadow-6dp: 0 3px 12px 3px var(--black-tint-000);
+
+    --svg-white: invert(100%) sepia(91%) saturate(38%) hue-rotate(321deg) brightness(110%) contrast(110%);
+    --svg-primary: invert(13%) sepia(84%) saturate(7435%) hue-rotate(346deg) brightness(88%) contrast(96%);
+
+    --text-headline: 1.5rem/2rem Poppins_Bold, Arial, Helvetica, sans-serif;
+    --text-subtitle-1: 0.875rem/1rem Poppins_Bold, Arial, Helvetica, sans-serif;
+    --text-subtitle-2: 0.75rem/1rem Poppins_Bold, Arial, Helvetica, sans-serif;
+    --text-subtitle-3: 0.625rem/1rem Poppins_Bold, Arial, Helvetica, sans-serif;
+    --text-body-1: 0.875rem/1rem Poppins, Arial, Helvetica, sans-serif;
+    --text-body-2: 0.75rem/1rem Poppins, Arial, Helvetica, sans-serif;
+    --text-body-3: 0.625rem/1rem Poppins, Arial, Helvetica, sans-serif;
+    --text-caption: 0.5rem/0.75rem Poppins, Arial, Helvetica, sans-serif;
+
+    --grid-item-size: 6rem;
+}
+
+&&::-webkit-scrollbar {
+    display: none;
+}
+
+body {
+    font-family: Poppins, Arial, Helvetica, sans-serif;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+
+    max-width: var(--max-width-page);
+    margin: 0 auto;
+    background-color: var(--color-primary);
+}
+
+button {
+    cursor: pointer;
+}
+
+.fxcol {
+    display: flex;
+    flex-direction: column;
+}
+
+.fxrow {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+}
+
+.standard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(var(--grid-item-size), 1fr));
+    grid-template-rows: repeat(auto-fill, minmax(var(--grid-item-size), 1fr));
+    gap: var(--spacing-reg);
+}
+
+.header-detail{
+    display: grid;
+    max-height: 20rem;
+    > *:not(.detail-image-container) {
+        width: 100%;
+        height: fit-content;
+    }
+}
+
+.header-detail>* {
+    grid-area: 1 / 1;
+}
+
+.detail-image-container{
+    justify-self: center;
+    width: 60%;
+    aspect-ratio: 1/1;
+}
+
+.detail-image-pokemon{
+    width: 100%;
+    object-fit: contain;
+}
+
+.detail-top, .detail-navigation-arrows{
+    justify-content: space-between;
+}
+
+.detail-navigation-arrows{
+    align-self:  center;
+}
+
+/*     MEDIA QUERIES     */
+@media only screen and (max-width: 40rem) {}

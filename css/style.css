@@ -107,10 +107,6 @@ button {
     flex-direction: column;
 }
 
-.headline {
-    font: var(--text-body);
-}
-
 .fxrow {
     display: flex;
     flex-direction: row;
