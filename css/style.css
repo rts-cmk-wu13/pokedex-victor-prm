@@ -96,8 +96,10 @@ main {
     border-radius: var(--spacing-hlf);
     box-shadow: inset var(--shadow-2dp);
     min-height: 80dvh;
+}
 
-    
+button {
+    cursor: pointer;
 }
 
 .fxcol {
@@ -126,7 +128,7 @@ main {
 .header-index {
     background-color: var(--color-primary);
     display: grid;
-    padding: var(--spacing-reg) var(--spacing-hlf) var(--spacing-hlf);
+    padding: var(--spacing-reg);
     gap: var(--spacing-hlf);
 }
 
@@ -194,7 +196,6 @@ img[src*="svg"] {
 }
 
 /*     CARD     */
-
 .pokemon-card {
     display: grid;
     background-color: var(--gray-1000);
@@ -248,7 +249,6 @@ img[src*="svg"] {
 }
 
 /*     CLICKABLE CARD     */
-
 .clickable-card {
     position: relative;
 
@@ -281,7 +281,7 @@ img[src*="svg"] {
     justify-content: center;
     align-items: center;
     z-index: 1;
-    background-color: color-mix(in srgb, var(--gray-1000) 20%, transparent);
+    background-color: var(--black-tint-000);
     backdrop-filter: blur(4px);
 }
 
@@ -306,28 +306,40 @@ img[src*="svg"] {
 }
 
 /*    DROPDOWN     */
-.search-bar__sort-container {
-    position: relative;
+.search-bar__sort-button{
+    anchor-name: --menu-anchor;
 }
 
+
 .search-bar__sort-dropdown-container {
-    z-index: 10;
+    position-anchor: --menu-anchor;
+    inset: auto;
+    top: anchor(bottom);
+    right: anchor(right);
     margin-top: var(--spacing-hlf);
     position: absolute;
+
     background: var(--color-primary);
-    transform: translateX(-70%);
     padding: var(--spacing-qtr);
     border-radius: var(--spacing-hlf);
+    border: none;
+    box-shadow: var(--shadow-6dp);
+}
+
+.search-bar__sort-dropdown-container::backdrop {
+    background-color: var(--black-tint-000);
+    backdrop-filter: blur(4px);
 }
 
 .search-bar__sort-dropdown {
     padding: var(--spacing-reg);
     background-color: white;
     border-radius: var(--spacing-hlf);
+    box-shadow: inset var(--shadow-2dp);
 }
 
 .search-bar__sort-dropdown-item {
-    display: inline-flex;
+    display: flex;
     align-items: center;
     font: var(--text-body-3);
     gap: var(--spacing-qtr);
@@ -337,13 +349,8 @@ img[src*="svg"] {
     }
 }
 
-button {
-    cursor: pointer;
-}
-
-.dropdown-background {
-    position: fixed;
-    inset: 0;
+.search-bar__sort-form{
+    display: grid
 }
 
 .search-bar__sort-dropdown-title {

@@ -35,20 +35,21 @@ function createSearchBar() {
             </div>`
 }
 
+/* ${createSortItem("Number")}
+${createSortItem("Letter")} */
+
 function createSortMenu() {
     return `<div class="search-bar__sort-container">
-                <button class="search-bar__sort-button header-button"><img src="./assets/svg/sort.svg" alt="" popovertarget="dropdown-all" popovertargetaction="hide" onclick="console.log('click')"></button>
-                <div class="search-bar__sort-dropdown-all" popover id="dropdown-all">
-                    <div class="search-bar__sort-dropdown-container">
-                        <p class="search-bar__sort-dropdown-title">Sort By:</p>
-                        <div class="search-bar__sort-dropdown">
-                            <form action="">
-                                ${createSortItem("Number")}
-                                ${createSortItem("Letter")}
-                            </form>
-                        </div>
+                <button class="search-bar__sort-button header-button" onclick="toggleMenu('dropdown-menu-sort',1,1)"><img src="./assets/svg/sort.svg" alt=""></button>
+                <dialog class="search-bar__sort-dropdown-container" id="dropdown-menu-sort">
+                    <p class="search-bar__sort-dropdown-title">Sort By:</p>
+                    <div class="search-bar__sort-dropdown">
+                        <form action="search-bar__sort-form">
+                            ${createSortItem("Number")}
+                            ${createSortItem("Name")}
+                        </form>
                     </div>
-                </div>
+                </dialog>
             </div>`
 }
 
@@ -66,3 +67,41 @@ function showLoader(bool) {
     let modifier = "hidden"
     bool ? loaderElm.classList.remove(modifier) : loaderElm.classList.add(modifier);
 }
+
+function toggleMenu(targetID, isModal, isDismissable) {
+    //Get the dialog element
+    let targetElm = document.querySelector("#" + targetID);
+
+    //Toggle open/close
+    if (targetElm.open) {
+        targetElm.close()
+    } else {
+        //Set if dialog should be displayed as modal or non-modal
+        isModal ? targetElm.showModal() : targetElm.show();
+        //Focus parent element to handle light dismiss
+        targetElm.focus();
+    }
+
+    //Handle light dismiss (close menu if focus is lost, e.g. tabbing away or click outside)
+    if (isDismissable) {
+        let lightDismiss = "data-light-dismiss";
+        if (targetElm.hasAttribute(lightDismiss)) {
+            return;
+        } else {
+            targetElm.addEventListener("focusout", (event) => {
+                focusedOrHasFocused = targetElm.matches(':focus-within');
+                if (!focusedOrHasFocused) {
+                    targetElm.close()
+                }
+            });
+            targetElm.addEventListener('click', function (e) {
+                if (e.target === e.currentTarget) {
+                    e.stopPropagation();
+                    targetElm.close();
+                }
+            })
+            targetElm.setAttribute(lightDismiss, "");
+        }
+    }
+}
+
