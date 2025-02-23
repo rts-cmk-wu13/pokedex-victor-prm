@@ -86,7 +86,6 @@ body {
 
     max-width: var(--max-width-page);
     margin: 0 auto;
-    background-color: var(--color-primary);
 }
 
 button {
@@ -151,8 +150,6 @@ button {
     }
 }
 
-
-
 header button {
     height: 2rem;
     border: none;
@@ -167,7 +164,6 @@ header button {
         filter: var(--svg-white);
     }
 }
-
 
 .detail-image-container{
     position: relative;
@@ -195,6 +191,16 @@ header button {
 
 .detail-navigation-arrows{
     align-self:  end;
+}
+
+.detail-card{
+    background-color: var(--gray-1000);
+    margin: var(--spacing-hlf);
+    height: 100%;
+}
+
+.detail-main-image{
+    height: 3rem;
 }
 
 /*     MEDIA QUERIES     */
