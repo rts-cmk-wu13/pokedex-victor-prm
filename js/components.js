@@ -30,8 +30,8 @@ function createCard(pokeData) {
 function createSearchBar() {
     return `<div class="search-bar-container fxrow">
                 <img class="search-bar__search-icon" src="./assets/svg/search.svg" alt="Search Icon">
-                <input class="search-bar" type="search" name="" id="">
-                <button class="search-bar__delete-button header-button"><img src="./assets/svg/close.svg" alt=""></button>
+                <input class="search-bar" type="search" name="" id="search-bar">
+                <button class="search-bar__delete-button header-button" onclick="clearSearchBar('search-bar')"><img src="./assets/svg/close.svg" alt=""></button>
             </div>`
 }
 
@@ -41,7 +41,7 @@ function createSortMenu() {
                 <dialog class="search-bar__sort-dropdown-container" id="dropdown-menu-sort">
                     <p class="search-bar__sort-dropdown-title">Sort By:</p>
                     <div class="search-bar__sort-dropdown">
-                        <form action="search-bar__sort-form">
+                        <form class="search-bar__sort-form" onchange="sortPokemon(this)">
                             ${createSortItem("Number")}
                             ${createSortItem("Name")}
                         </form>

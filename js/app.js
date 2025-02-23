@@ -12,9 +12,6 @@ loaderElm.innerHTML = `<div class="loader"><img src="assets/svg/pokeball.svg" al
 rootElm.append(headerElm, loaderElm, mainElm)
 headerElm.innerHTML += createHeader();
 
-function sortArray() {
-    allpokemon.sort((a, b) => a.id > b.id ? 1 : -1);
-}
 
 const fetchPokemon = () => {
     showLoader(true);
@@ -30,33 +27,82 @@ const fetchPokemon = () => {
             type: result.types.map((type) => type.type.name),
             id: result.id
         })).sort((a, b) => a.id > b.id ? 1 : -1);
-        populateGrid(pokemon);
+        populateArray(pokemon);
         showLoader(false);
     })
 };
-function populateGrid(pokeArray) {
+
+/*     POPULATE ARRAYS     */
+function populateArray(pokeArray) {
     pokeArray.forEach((pokemon) => {
         allpokemon.push(pokemon)
+    });
+    populateGrid(allpokemon);
+}
+
+
+function populateGrid(pokeArray) {
+    mainElm.innerHTML = "";
+    pokeArray.forEach((pokemon) => {
         mainElm.innerHTML += createCard(pokemon);
     });
 }
 
-function colorBackgroundType(selector, type) {
-    selector.removeEventListener("mouseout", backToNormal);
+/*     SORT ARRAYS     */
+function sortPokemon(thisElement) {
+    let eles = thisElement.getElementsByTagName('input');
+    let currentSelection;
     
-    let color = `color-mix(in srgb, ${getCSScolor('--color-'+type)} 10%, transparent)`;
-    selector.closest("div").style.backgroundColor = color;
-    selector.addEventListener("mouseout", backToNormal);
+    //Find the current value of the radio button group
+    for (i = 0; i < eles.length; i++) {
+        if (eles[i].type = "radio")
+            if (eles[i].checked) {
+                currentSelection = eles[i].value;
+            }
+    }
+    console.log(currentSelection);
+    if (currentSelection == "NUMBER") {
+        sortByID();
+    } else {
+        sortByName();
+    }
 
-    function backToNormal(){
-        selector.closest("div").style.backgroundColor =  'var(--gray-900)';
+    //Repopulate the grid
+    populateGrid(allpokemon);
+    //Close the menu
+    toggleMenu('dropdown-menu-sort',1,1);
+
+    //Sort functions
+    function sortByID() {
+        allpokemon = allpokemon.sort((a, b) => a.id > b.id ? 1 : -1);
+    }
+
+    function sortByName() {
+        allpokemon = allpokemon.sort((a, b) => a.name > b.name ? 1 : -1);
     }
 }
 
-function getCSScolor(varName){
+
+function colorBackgroundType(selector, type) {
+    selector.removeEventListener("mouseout", backToNormal);
+
+    let color = `color-mix(in srgb, ${getCSScolor('--color-' + type)} 10%, transparent)`;
+    selector.closest("div").style.backgroundColor = color;
+    selector.addEventListener("mouseout", backToNormal);
+
+    function backToNormal() {
+        selector.closest("div").style.backgroundColor = 'var(--gray-900)';
+    }
+}
+
+function getCSScolor(varName) {
     const root = document.documentElement;
     const currentColor = getComputedStyle(root).getPropertyValue(varName);
     return currentColor;
+}
+
+function clearSearchBar(id) {
+    document.querySelector("#" + id).value = "";
 }
 
 fetchPokemon();
