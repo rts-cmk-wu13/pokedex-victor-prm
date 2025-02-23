@@ -1,7 +1,7 @@
 function createHeader() {
     return `<div class="header-logo fxrow">
                 <img class="header-logo__pokeball" src="./assets/svg/pokeball.svg" alt="Pokeball Logo">
-                <h1>Pokedex</h1>
+                <h1 class="header-logo__title">Pokedex</h1>
             </div>
             <nav class="search-and-sort fxrow">
                 ${createSearchBar()}
@@ -35,9 +35,6 @@ function createSearchBar() {
             </div>`
 }
 
-/* ${createSortItem("Number")}
-${createSortItem("Letter")} */
-
 function createSortMenu() {
     return `<div class="search-bar__sort-container">
                 <button class="search-bar__sort-button header-button" onclick="toggleMenu('dropdown-menu-sort',1,1)"><img src="./assets/svg/sort.svg" alt=""></button>
@@ -54,7 +51,6 @@ function createSortMenu() {
 }
 
 function createSortItem(content) {
-    console.log(content)
     let id = content.toLowerCase();
     let value = content.toUpperCase();
     return `<div class="search-bar__sort-dropdown-item">

@@ -36,6 +36,7 @@ const fetchPokemon = () => {
 };
 function populateGrid(pokeArray) {
     pokeArray.forEach((pokemon) => {
+        allpokemon.push(pokemon)
         mainElm.innerHTML += createCard(pokemon);
     });
 }
@@ -43,13 +44,19 @@ function populateGrid(pokeArray) {
 function colorBackgroundType(selector, type) {
     selector.removeEventListener("mouseout", backToNormal);
     
-    let color = `color-mix(in srgb, var(--color-${type}) 10%, transparent)`;
+    let color = `color-mix(in srgb, ${getCSScolor('--color-'+type)} 10%, transparent)`;
     selector.closest("div").style.backgroundColor = color;
     selector.addEventListener("mouseout", backToNormal);
 
     function backToNormal(){
         selector.closest("div").style.backgroundColor =  'var(--gray-900)';
     }
+}
+
+function getCSScolor(varName){
+    const root = document.documentElement;
+    const currentColor = getComputedStyle(root).getPropertyValue(varName);
+    return currentColor;
 }
 
 fetchPokemon();

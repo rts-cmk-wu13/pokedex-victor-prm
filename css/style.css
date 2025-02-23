@@ -124,6 +124,9 @@ button {
 }
 
 /*     HEADER     */
+.header-logo__title {
+    font: var(--text-headline);
+}
 
 .header-index {
     background-color: var(--color-primary);
@@ -140,6 +143,12 @@ button {
     align-items: center;
 }
 
+.header-logo {
+    *> {
+        height: 1.5rem;
+    }
+}
+
 .search-bar-container,
 .search-bar {
     width: 100%;
@@ -152,6 +161,28 @@ button {
 
 .search-bar {
     padding: 0 var(--spacing-dbl);
+    font: var(--text-body-3);
+
+    /* clears the ‘X’ from Internet Explorer */
+    &&::-ms-clear {
+        display: none;
+        width: 0;
+        height: 0;
+    }
+
+    &&::-ms-reveal {
+        display: none;
+        width: 0;
+        height: 0;
+    }
+
+    /* clears the ‘X’ from Chrome */
+    &&::-webkit-search-decoration,
+    &&::-webkit-search-cancel-button,
+    &&::-webkit-search-results-button,
+    &&::-webkit-search-results-decoration {
+        display: none;
+    }
 }
 
 .search-bar__delete-button {
@@ -184,7 +215,7 @@ img[src*="svg"] {
 }
 
 .header-logo__pokeball {
-    height: 2rem !important;
+    height: 1.5rem !important;
     filter: var(--svg-white);
 }
 
@@ -193,6 +224,22 @@ img[src*="svg"] {
     display: flex;
     align-items: center;
     justify-content: center;
+
+    background-color: var(--gray-1000);
+    box-shadow: inset var(--shadow-2dp);
+
+    &&:hover {
+        box-shadow: var(--shadow-6dp);
+    }
+
+    img {
+        filter: var(--svg-primary);
+    }
+}
+
+.search-bar__delete-button{
+    background-color: transparent;
+    box-shadow: none
 }
 
 /*     CARD     */
@@ -306,7 +353,7 @@ img[src*="svg"] {
 }
 
 /*    DROPDOWN     */
-.search-bar__sort-button{
+.search-bar__sort-button {
     anchor-name: --menu-anchor;
 }
 
@@ -316,7 +363,7 @@ img[src*="svg"] {
     inset: auto;
     top: anchor(bottom);
     right: anchor(right);
-    margin-top: var(--spacing-hlf);
+    margin-top: var(--spacing-reg);
     position: absolute;
 
     background: var(--color-primary);
@@ -349,7 +396,7 @@ img[src*="svg"] {
     }
 }
 
-.search-bar__sort-form{
+.search-bar__sort-form {
     display: grid
 }
 
