@@ -11,7 +11,7 @@ function populateDetail(pokemon) {
     mainColor = getCSScolor(`--color-${type}`);
     let rootElm = document.querySelector(".detail-wrapper");
     let headerElm = document.createElement("header");
-    headerElm.classList.add("header-detail", "fxcol");
+    headerElm.classList.add("header-detail");
 
     let mainElm = document.createElement("main");
     mainElm.classList.add("detail-card");
@@ -30,6 +30,9 @@ function populateHeader(pokemon) {
                 </div>
                 <h1 class="detail-top__title capitalize">${pokemon.name}</h1>
                 <p class="detail-top__number">#${padNumber(pokemon.id)}</p>
+            </div>
+            <div class="detail-watermark-container">
+                <img class="detail-watermark" src="./assets/svg/pokeball.svg" alt="Pokeball watermark">
             </div>
             <div class="detail-navigation-arrows fxrow">
                     ${changeIndexButton(pokemon, false)}

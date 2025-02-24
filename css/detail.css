@@ -118,7 +118,7 @@ button {
     display: grid;
     padding: var(--spacing-reg);
 
-    >*:not(.detail-image-container) {
+    >*:not(.detail-image-container, .detail-watermark-container) {
         width: 100%;
         height: fit-content;
     }
@@ -245,6 +245,18 @@ header button {
 
 .detail-section__title {
     font: var(--text-subtitle-1)
+}
+
+.detail-watermark-container{
+    height: 100%;
+    width: fit-content;
+    margin-left: auto;
+    opacity: 0.2;
+}
+
+.detail-watermark{
+    height: 100%;
+    filter: var(--svg-white);
 }
 
 .about-section__cards_container {
