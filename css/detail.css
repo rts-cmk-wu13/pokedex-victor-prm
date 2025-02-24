@@ -203,5 +203,37 @@ header button {
     height: 3rem;
 }
 
+.pokemon-type-pill{
+    border-radius: 16rem;
+    width: fit-content;
+    font: var(--text-subtitle-3);
+    color: var(--gray-1000);
+    padding: var(--spacing-qtr) var(--spacing-hlf);
+    text-transform: capitalize;
+    align-items: center;
+    justify-content: center;
+    * {
+        height: 0.75rem;
+    }
+    
+}
+
+.detail-main{
+    padding: calc(var(--spacing-reg) * 5) var(--spacing-reg);
+    gap: var(--spacing-reg);
+    justify-content: center;
+    * > {
+        width: fit-content;
+    }
+}
+
+.detail-main__types-container{
+    gap: var(--spacing-hlf);
+}
+
+.detail-navigation-arrow--next{
+    margin-left: auto;
+}
+
 /*     MEDIA QUERIES     */
 @media only screen and (max-width: 40rem) {}

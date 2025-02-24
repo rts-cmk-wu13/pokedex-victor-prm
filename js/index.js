@@ -16,7 +16,7 @@ headerElm.innerHTML += createHeader();
 const fetchPokemon = () => {
     showLoader(true);
     const promises = [];
-    for (let i = 1; i <= 24; i++) {
+    for (let i = 1; i <= 48; i++) {
         const url = `https://pokeapi.co/api/v2/pokemon/${i}`;
         promises.push(fetch(url).then((res) => res.json()));
     }
@@ -35,7 +35,7 @@ const fetchPokemon = () => {
 /*     POPULATE ARRAYS     */
 function populateArray(pokeArray) {
     pokeArray.forEach((pokemon) => {
-        allpokemon.push(pokemon)
+        allpokemon.push(pokemon);
     });
     populateGrid(allpokemon);
 }
