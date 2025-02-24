@@ -141,6 +141,7 @@ button {
 }
 
 .header-logo {
+    padding: 0.125rem;
     *> {
         height: 1.5rem;
     }
@@ -159,6 +160,7 @@ button {
 .search-bar {
     padding: 0 var(--spacing-dbl);
     font: var(--text-body-3);
+    box-shadow: inset var(--shadow-2dp);
 
     /* clears the ‘X’ from Internet Explorer */
     &&::-ms-clear {

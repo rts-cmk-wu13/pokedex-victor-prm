@@ -17,8 +17,8 @@
 }
 
 :root {
-    --max-width-content: 70rem;
-    --max-width-page: 80rem;
+    --max-width-content: 54rem;
+    --max-width-page: 60rem;
     --spacing-reg: 1rem;
     --spacing-dbl: calc(var(--spacing-reg)*2);
     --spacing-hlf: calc(var(--spacing-reg)/2);
@@ -126,6 +126,15 @@ button {
 
 .detail-top__title {
     font: var(--text-headline);
+    text-align: center;
+}
+
+.detail-top__name {
+    font: var(--text-headline);
+}
+
+.detail-top__name-ja {
+    font: var(--text-subtitle-1);
 }
 
 .detail-top__number {
@@ -183,6 +192,9 @@ header button {
     width: 100%;
     height: 100%;
     object-fit: contain;
+
+    opacity: 0;
+    animation: fadeIn 1s forwards;
 }
 
 .detail-top {
@@ -192,7 +204,6 @@ header button {
 .detail-top,
 .detail-navigation-arrows {
     justify-content: space-between;
-    align-items: center;
 }
 
 .detail-navigation-arrows {
@@ -324,6 +335,16 @@ header button {
     color: var(--gray-200);
 }
 
+.about-section__frontback{
+    gap: var(--spacing-reg);
+    height: 4rem;
+    justify-content: center;
+}
+
+.about-section__frontback > img{
+    height: 100%;
+}
+
 
 
 /*     MEDIA QUERIES     */
@@ -331,4 +352,10 @@ header button {
 
 .rotate-90 {
     transform: rotate(90deg);
+}
+
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+    }
 }

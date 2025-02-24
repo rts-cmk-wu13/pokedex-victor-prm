@@ -15,9 +15,12 @@ fetch(url)
         // Get the latest flavor text (in English)
         let lastIndex = species.flavor_text_entries.map(s => s.language.name === "en").lastIndexOf(true);
         let mostToDateText = species.flavor_text_entries[lastIndex].flavor_text;
-        
         // Add the flavor text to the pokemon object (optional, but convenient)
         pokemon.flavorText = mostToDateText;
+        
+        let japaneseIndex = species.names.map(s => s.language.name === "ja").lastIndexOf(true);
+        let japaneseName = species.names[japaneseIndex].name;
+        pokemon.name_ja = japaneseName;
         
         // Now you can pass the combined data to your function
         populateDetail(pokemon);
@@ -40,7 +43,7 @@ function populateDetail(pokemon) {
     mainElm.innerHTML = populateInfo(pokemon);
 
     rootElm.append(headerElm, mainElm);
-    rootElm.style.backgroundColor = mainColor;
+    document.body.style.backgroundColor = mainColor;
 }
 
 function populateHeader(pokemon) {
@@ -48,7 +51,10 @@ function populateHeader(pokemon) {
                 <div class="detail-top__back-button">
                     <button class="header-button button-transparent" onclick="navigateToPage('index.html')"><img src="./assets/svg/arrow_back.svg" alt="Back arrow icon"></button>
                 </div>
-                <h1 class="detail-top__title capitalize">${pokemon.name}</h1>
+                <div class="detail-top__title">
+                    <h1 class="detail-top__name capitalize">${pokemon.name}</h1>
+                    <p class="detail-top__name-ja">${pokemon.name_ja}</p>
+                </div>
                 <p class="detail-top__number">#${padNumber(pokemon.id)}</p>
             </div>
             <div class="detail-watermark-container fxrow">
@@ -123,10 +129,8 @@ function populateAboutSection(pokemon) {
     }
 
     function aboutCardList(array, label) {
-        console.log(array)
 
         function createAboutListItem(value) {
-            console.log(value)
             return `<p class="about-card__value capitalize" id="about-value">${value}</p>`;
         }
 
@@ -163,6 +167,14 @@ function images() {
     <img class="detail-image-pokemon" src="${pokemon.sprites.other['home'].front_default}" alt="Image of the pokemon name ${pokemon.name}"></img>
     <img class="detail-main-image" src="${pokemon.sprites.other.showdown.front_default}" alt="">
     <img class="detail-main-image" src="${pokemon.sprites.other.showdown.back_default}" alt="">
+    
+    
+    
+    
+    <div class="about-section__frontback fxrow">
+                    <img class="about-section__front" src="${pokemon.sprites.other.showdown.front_default}" alt="">
+                    <img class="about-section__front" src="${pokemon.sprites.other.showdown.back_default}" alt="">
+    </div>
     `
 }
 

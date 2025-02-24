@@ -12,7 +12,7 @@ function createHeader() {
 
 function createCard(pokeData) {
     let id = pokeData.id;
-    let semiRandomID = id+pokeData.type[0];
+    let semiRandomID = id + pokeData.type[0];
 
     return `<article class="pokemon-card fxcol clickable-card">
                 <p class="pokemon-card__number">#${padNumber(id)}</p>
@@ -33,13 +33,15 @@ function createSearchBar() {
             </div>`
 }
 
+
+
 function createSortMenu() {
     return `<div class="search-bar__sort-container">
                 <button class="search-bar__sort-button header-button" onclick="toggleMenu('dropdown-menu-sort',1,1)"><img src="./assets/svg/sort.svg" alt=""></button>
                 <dialog class="search-bar__sort-dropdown-container" id="dropdown-menu-sort">
                     <p class="search-bar__sort-dropdown-title">Sort By:</p>
                     <div class="search-bar__sort-dropdown">
-                        <form class="search-bar__sort-form" onchange="sortPokemon(this)">
+                        <form class="search-bar__sort-form" onchange="performSort(this)">
                             ${createSortItem("Number")}
                             ${createSortItem("Name")}
                         </form>
@@ -55,11 +57,6 @@ function createSortItem(content) {
                 <input type="radio" id="${id}" name="sort-selection" value="${value}">
                 <label for="${id}">${content}</label>
             </div>`
-}
-
-function showLoader(bool) {
-    let modifier = "hidden"
-    bool ? loaderElm.classList.remove(modifier) : loaderElm.classList.add(modifier);
 }
 
 function toggleMenu(targetID, isModal, isDismissable) {

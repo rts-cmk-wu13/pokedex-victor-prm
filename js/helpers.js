@@ -35,7 +35,82 @@ function navigateToPage(page) {
     document.location.href = page;
 }
 
-function convertUnit(value){
+function convertUnit(value) {
     //Height and weight values from the API is measured in decimeters/dekagrams, so here we convert to meters
-    return value/10;
+    return value / 10;
 }
+
+function showLoader(bool) {
+    let modifier = "hidden"
+    bool ? loaderElm.classList.remove(modifier) : loaderElm.classList.add(modifier);
+}
+
+/*     SORT ARRAYS     */
+function sortPokemon(thisElement) {
+    let eles = thisElement.getElementsByTagName('input');
+    let currentSelection;
+
+    //Find the current value of the radio button group
+    for (i = 0; i < eles.length; i++) {
+        if (eles[i].type = "radio")
+            if (eles[i].checked) {
+                currentSelection = eles[i].value;
+            }
+    }
+
+    if (currentSelection == "NUMBER") {
+        sortByID();
+    } else {
+        sortByName();
+    }
+
+    //Repopulate the grid
+    populateGrid(allpokemon);
+    documentIsLoading(false);
+    //Sort functions
+    function sortByID() {
+        allpokemon = allpokemon.sort((a, b) => a.id > b.id ? 1 : -1);
+    }
+
+    function sortByName() {
+        allpokemon = allpokemon.sort((a, b) => a.name > b.name ? 1 : -1);
+    }
+}
+
+function performSort(t) {
+    toggleMenu('dropdown-menu-sort', 1, 1);
+    documentIsLoading(true);
+    const myTimeout = setTimeout(() => sortPokemon(t), 1);
+
+}
+
+function documentIsLoading(bool) {
+    let bodyElm = document.body;
+    bodyElm.setAttribute('data-loading', bool);
+}
+
+function trackLoadingStatus() {
+    let bodyElm = document.body;
+    var observer = new MutationObserver(function (mutations) {
+        mutations.forEach(function (mutation) {
+            if (mutation.type === "attributes") {
+                console.log("attributes changed");
+
+                let isLoading = mutation.target.getAttribute("data-loading");
+                isLoading = (isLoading === 'true');
+
+                if (isLoading) {
+                    showLoader(true);
+                } else {
+                    showLoader(false);
+                }
+            }
+        });
+    });
+
+    observer.observe(bodyElm, {
+        attributes: true //configure it to listen to attribute changes
+    });
+}
+
+trackLoadingStatus();
