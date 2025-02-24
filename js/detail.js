@@ -42,27 +42,6 @@ function populateHeader(pokemon) {
 
 
 
-
-function changeIndexButton(pokemon, isNext) {
-    if((pokemon.id == 1 && !isNext) || (pokemon.id == 1025 && isNext)){
-        return "";
-    }
-
-    let link,iconPath,cssModifier;
-    let currentPage = window.location.href.split('?')[0];
-    
-
-    link = `${currentPage}?id=${isNext ? pokemon.id + 1 : pokemon.id - 1}`;
-    iconPath = `./assets/svg/chevron_${isNext ? "right" : "left"}.svg`;
-    cssModifier = isNext ? "next" : "previous"
-    console.log(link,iconPath, cssModifier)
-
-    return `<div class="detail-navigation-arrow detail-navigation-arrow--${cssModifier}">
-                <button class="header-button button-transparent" onclick="navigateToPage('${link}')"><img src="${iconPath}" alt="${cssModifier} arrow icon"></button>
-            </div>`
-
-}
-
 function populateInfo(pokemon) {
     return `<div class="detail-main fxrow">
                 <section class="detail-main__types-container fxrow">
@@ -98,4 +77,23 @@ function images() {
     <img class="detail-main-image" src="${pokemon.sprites.other.showdown.front_default}" alt="">
     <img class="detail-main-image" src="${pokemon.sprites.other.showdown.back_default}" alt="">
     `
+}
+
+function changeIndexButton(pokemon, isNext) {
+    if ((pokemon.id == 1 && !isNext) || (pokemon.id == 1025 && isNext)) {
+        return "";
+    }
+
+    let link, iconPath, cssModifier;
+    let currentPage = window.location.href.split('?')[0];
+
+
+    link = `${currentPage}?id=${isNext ? pokemon.id + 1 : pokemon.id - 1}`;
+    iconPath = `./assets/svg/chevron_${isNext ? 'right' : 'left'}.svg`;
+    cssModifier = isNext ? 'next' : 'previous';
+    console.log(link, iconPath, cssModifier);
+
+    return `<div class="detail-navigation-arrow detail-navigation-arrow--${cssModifier}">
+                <button class="header-button button-transparent" onclick="navigateToPage('${link}')"><img src="${iconPath}" alt="${cssModifier} arrow icon"></button>
+            </div>`
 }
