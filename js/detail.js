@@ -2,7 +2,27 @@ const urlParams = new URLSearchParams(window.location.search);
 const pokeID = urlParams.get('id');
 
 const url = `https://pokeapi.co/api/v2/pokemon/${pokeID}`;
-fetch(url).then(res => res.json()).then(pokemon => populateDetail(pokemon));
+
+fetch(url)
+    .then(res => res.json())
+    .then(pokemon => {
+        // Start fetching the species data in parallel
+        const speciesUrl = pokemon.species.url;
+        return Promise.all([pokemon, fetch(speciesUrl).then(res => res.json())]);
+    })
+    .then(([pokemon, species]) => {
+        // Now you have both pokemon and species data
+        // Get the latest flavor text (in English)
+        let lastIndex = species.flavor_text_entries.map(s => s.language.name === "en").lastIndexOf(true);
+        let mostToDateText = species.flavor_text_entries[lastIndex].flavor_text;
+        
+        // Add the flavor text to the pokemon object (optional, but convenient)
+        pokemon.flavorText = mostToDateText;
+        
+        // Now you can pass the combined data to your function
+        populateDetail(pokemon);
+    });
+
 let mainColor;
 
 function populateDetail(pokemon) {
@@ -31,7 +51,7 @@ function populateHeader(pokemon) {
                 <h1 class="detail-top__title capitalize">${pokemon.name}</h1>
                 <p class="detail-top__number">#${padNumber(pokemon.id)}</p>
             </div>
-            <div class="detail-watermark-container">
+            <div class="detail-watermark-container fxrow">
                 <img class="detail-watermark" src="./assets/svg/pokeball.svg" alt="Pokeball watermark">
             </div>
             <div class="detail-navigation-arrows fxrow">
@@ -64,7 +84,7 @@ function createDetailSection(title, content) {
 
 function populateAboutSection(pokemon) {
     return `<div class="about-section fxcol">
-                <div class="about-section__cards_container fxrow">
+                <div class="about-section__cards_container">
                     ${aboutCardIcon(pokemon.weight, "weight")}
                     ${horizontalDivider()}
                     ${aboutCardIcon(pokemon.height, "height")}
@@ -72,7 +92,7 @@ function populateAboutSection(pokemon) {
                     ${aboutCardList(pokemon.abilities, "abilities")}
                 </div>
                 <div class="about-section__text-container">
-                    <p class="about-section__flavor-text capitalize"> Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti, ut!</p>
+                    <p class="about-section__flavor-text capitalize">${pokemon.flavorText} </p>
                 </div>
             </div>`
 
@@ -117,7 +137,7 @@ function populateAboutSection(pokemon) {
                     <div class="about-card__content fxcol">
                         ${createList()}
                     </div>
-                    <label class="about-card__label" for="about-value">${label}</label>
+                    <label class="about-card__label capitalize" for="about-value">${label}</label>
                 </div>`
     }
 }

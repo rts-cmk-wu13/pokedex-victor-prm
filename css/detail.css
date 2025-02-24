@@ -249,31 +249,36 @@ header button {
 
 .detail-watermark-container{
     height: 100%;
-    width: fit-content;
-    margin-left: auto;
-    opacity: 0.2;
+    width: 100%;
+    max-width: 40rem;
+    margin: 0 auto;
+    justify-content: end;
 }
 
 .detail-watermark{
     height: 100%;
+    opacity: 0.15;
     filter: var(--svg-white);
 }
 
 .about-section__cards_container {
+    display: grid;
+    width: 100%;
+    min-height: 4.5rem;
+    grid-template-columns: 1fr var(--spacing-hlf) 1fr var(--spacing-hlf) 1fr;
     gap: var(--spacing-hlf);
-}
-
-.about-section__cards_container>*:not(.horizontal-divider) {
-    flex: 1;
 }
 
 .horizontal-divider {
     width: 1px;
-    align-self: stretch;
+    height: 100%;
+    margin: 0 auto;
     background-color: var(--gray-800);
 }
 
 .about-section {
+    width: 100%;
+    max-width: 32rem;
     gap: var(--spacing-reg);
 }
 
@@ -285,7 +290,6 @@ header button {
 }
 
 .about-card__content {
-    padding: var(--spacing-reg);
     gap: var(--spacing-hlf);
     align-items: center;
 }
@@ -301,6 +305,7 @@ header button {
 .about-card__value {
     font: var(--text-body-3);
     height: 0.75rem;
+    width: fit-content;
 }
 
 .about-card__label {
@@ -309,6 +314,7 @@ header button {
 }
 
 .about-section__flavor-text{
+    text-align: center;
     font:var(--text-body-3);
 }
 
