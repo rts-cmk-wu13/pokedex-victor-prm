@@ -3,12 +3,12 @@ const pokeID = urlParams.get('id');
 
 const url = `https://pokeapi.co/api/v2/pokemon/${pokeID}`;
 fetch(url).then(res => res.json()).then(pokemon => populateDetail(pokemon));
-
+let mainColor;
 
 function populateDetail(pokemon) {
     console.log(pokemon)
     let type = pokemon.types[0].type.name;
-    let mainColor = getCSScolor(`--color-${type}`);
+    mainColor = getCSScolor(`--color-${type}`);
     let rootElm = document.querySelector(".detail-wrapper");
     let headerElm = document.createElement("header");
     headerElm.classList.add("header-detail", "fxcol");
@@ -28,7 +28,7 @@ function populateHeader(pokemon) {
                 <div class="detail-top__back-button">
                     <button class="header-button button-transparent" onclick="navigateToPage('index.html')"><img src="./assets/svg/arrow_back.svg" alt="Back arrow icon"></button>
                 </div>
-                <h1 class="detail-top__title">${pokemon.name}</h1>
+                <h1 class="detail-top__title capitalize">${pokemon.name}</h1>
                 <p class="detail-top__number">#${padNumber(pokemon.id)}</p>
             </div>
             <div class="detail-navigation-arrows fxrow">
@@ -43,20 +43,80 @@ function populateHeader(pokemon) {
 
 
 function populateInfo(pokemon) {
-    return `<div class="detail-main fxrow">
+    return `<div class="detail-main fxcol">
                 <section class="detail-main__types-container fxrow">
                    ${createTypePills(pokemon.types)}
-                </section>  
+                </section>
+                ${createDetailSection("about", populateAboutSection(pokemon))}
+                ${createDetailSection("base stats")}
             </div>`
 }
 
 function createDetailSection(title, content) {
-    return `<section class="detail-section detail-section--${title} fxrow">
-                <h2 class="detail-section__title detail-section__title--${title}">${title}</h2>
-                <div class="detail-section__content-container detail-section__content-container--${title}">
-                    ${content ? content : ""}
-                </div>
+    return `<section class="detail-section detail-section--${title} fxcol">
+                <h2 class="detail-section__title detail-section__title--${title} capitalize" style="${setTypeColorText()}">${title}</h2>
+                ${content ? content : ""}
             </section>`
+}
+
+function populateAboutSection(pokemon) {
+    return `<div class="about-section fxcol">
+                <div class="about-section__cards_container fxrow">
+                    ${aboutCardIcon(pokemon.weight, "weight")}
+                    ${horizontalDivider()}
+                    ${aboutCardIcon(pokemon.height, "height")}
+                    ${horizontalDivider()}
+                    ${aboutCardList(pokemon.abilities, "abilities")}
+                </div>
+                <div class="about-section__text-container">
+                    <p class="about-section__flavor-text capitalize"> Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti, ut!</p>
+                </div>
+            </div>`
+
+    function aboutCardIcon(value, label) {
+        let unit = "";
+        let src = "";
+        let rotate = "";
+        if (label == "weight") {
+            unit = "kg";
+            src = "./assets/svg/weight.svg";
+        }
+        if (label == "height") {
+            unit = "m"
+            src = "./assets/svg/straighten.svg";
+            rotate = "rotate-90"
+        }
+
+        return `<div class="about-card fxcol">
+                    <div class="about-card__content fxrow">
+                        <div class="about-card__icon-container">
+                            <img class="about-card__icon ${rotate}" src="${src}" alt="">
+                        </div>
+                        <p class="about-card__value" id="about-value">${convertUnit(value)}<span class="about-card__unit">${unit}</span></p>
+                    </div>
+                    <label class="about-card__label capitalize" for="about-value">${label}</label>
+                </div>`
+    }
+
+    function aboutCardList(array, label) {
+        console.log(array)
+
+        function createAboutListItem(value) {
+            console.log(value)
+            return `<p class="about-card__value capitalize" id="about-value">${value}</p>`;
+        }
+
+        function createList() {
+            return array.map(item => createAboutListItem(item.ability.name)).join("")
+        }
+
+        return `<div class="about-card fxcol">
+                    <div class="about-card__content fxcol">
+                        ${createList()}
+                    </div>
+                    <label class="about-card__label" for="about-value">${label}</label>
+                </div>`
+    }
 }
 
 function createTypePills(pokeTypes) {
@@ -64,11 +124,14 @@ function createTypePills(pokeTypes) {
     return pills;
 
     function createTypePill(pokeType) {
-        console.log(pokeType);
-        return `<div class="pokemon-type-pill fxrow" style="background-color: ${getCSScolor('--color-' + pokeType)}">
+        return `<div class="pokemon-type-pill fxrow capitalize" style="${setTypeColorBG(pokeType)}">
                     <p class="pokemon-type-pill__text">${pokeType}</p>
                 </div>`
     }
+}
+
+function horizontalDivider() {
+    return `<div class="horizontal-divider"></div>`
 }
 
 function images() {
@@ -91,10 +154,17 @@ function changeIndexButton(pokemon, isNext) {
     link = `${currentPage}?id=${isNext ? pokemon.id + 1 : pokemon.id - 1}`;
     iconPath = `./assets/svg/chevron_${isNext ? 'right' : 'left'}` + ".svg";
     cssModifier = isNext ? 'next' : 'previous';
-    console.log(link, iconPath, cssModifier);
 
     return `<div class="detail-navigation-arrow detail-navigation-arrow--${cssModifier}">
                 <button class="header-button button-transparent" onclick="navigateToPage('${link}')"><img src="${iconPath}" alt="${cssModifier} arrow icon"></button>
             </div>`
+}
+
+function setTypeColorBG(pokeType) {
+    return `background-color: ${getCSScolor('--color-' + pokeType)}`;
+}
+
+function setTypeColorText() {
+    return `color: ${mainColor}`;
 }
 

@@ -34,3 +34,8 @@ function navigateToPage(page) {
     console.log(page)
     document.location.href = page;
 }
+
+function convertUnit(value){
+    //Height and weight values from the API is measured in decimeters/dekagrams, so here we convert to meters
+    return value/10;
+}
