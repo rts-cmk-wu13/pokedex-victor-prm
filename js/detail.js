@@ -89,7 +89,7 @@ function changeIndexButton(pokemon, isNext) {
 
 
     link = `${currentPage}?id=${isNext ? pokemon.id + 1 : pokemon.id - 1}`;
-    iconPath = `./assets/svg/chevron_${isNext ? 'right' : 'left'}.svg`;
+    iconPath = `./assets/svg/chevron_${isNext ? 'right' : 'left'}` + ".svg";
     cssModifier = isNext ? 'next' : 'previous';
     console.log(link, iconPath, cssModifier);
 
@@ -97,3 +97,4 @@ function changeIndexButton(pokemon, isNext) {
                 <button class="header-button button-transparent" onclick="navigateToPage('${link}')"><img src="${iconPath}" alt="${cssModifier} arrow icon"></button>
             </div>`
 }
+
