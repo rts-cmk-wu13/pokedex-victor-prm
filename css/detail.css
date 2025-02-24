@@ -283,10 +283,14 @@ header button {
 }
 
 .about-card {
+    display: grid;
+    justify-items: center;
     align-items: center;
     gap: var(--spacing-hlf);
-    align-self: stretch;
-    justify-content: space-between;
+}
+
+.about-card > * {
+    grid-area: 1 / 1;
 }
 
 .about-card__content {
@@ -309,6 +313,7 @@ header button {
 }
 
 .about-card__label {
+    align-self: end;
     font: var(--text-caption);
     color: var(--gray-600);
 }
@@ -316,6 +321,7 @@ header button {
 .about-section__flavor-text{
     text-align: center;
     font:var(--text-body-3);
+    color: var(--gray-200);
 }
 
 

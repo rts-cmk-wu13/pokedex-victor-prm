@@ -110,8 +110,9 @@ function populateAboutSection(pokemon) {
             rotate = "rotate-90"
         }
 
-        return `<div class="about-card fxcol">
+        return `<div class="about-card">
                     <div class="about-card__content fxrow">
+                        
                         <div class="about-card__icon-container">
                             <img class="about-card__icon ${rotate}" src="${src}" alt="">
                         </div>
@@ -133,8 +134,8 @@ function populateAboutSection(pokemon) {
             return array.map(item => createAboutListItem(item.ability.name)).join("")
         }
 
-        return `<div class="about-card fxcol">
-                    <div class="about-card__content fxcol">
+        return `<div class="about-card">
+                    <div class="about-card__content">
                         ${createList()}
                     </div>
                     <label class="about-card__label capitalize" for="about-value">${label}</label>
