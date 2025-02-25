@@ -255,6 +255,7 @@ function styleMeterPseudos(type) {
                         border-radius: var(--spacing-dbl);
                         border: none;
                         box-shadow: inset var(--shadow-2dp);
+                        outline: 1px var(--gray-900) solid;
                     }
 
                     ::-moz-meter-bar{

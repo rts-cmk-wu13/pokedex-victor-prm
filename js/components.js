@@ -20,7 +20,7 @@ function createCard(pokeData) {
                     <p class="pokemon-card__name"><a class="pokemon-card__hidden-link" href="${linkToID(id)}" onmouseover="colorBackgroundType(this, '${pokeData.type[0]}')">${pokeData.name}</a></p>
                 </div>
                 <div class="pokemon-card__image-container fxrow">
-                    <img class="pokemon-card__image "src="${pokeData.image}" alt="">
+                    <img class="pokemon-card__image "src="${pokeData.image}" alt="" loading="lazy">
                 </div>
             </article>`
 }
