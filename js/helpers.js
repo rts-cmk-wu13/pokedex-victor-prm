@@ -73,13 +73,41 @@ function sortPokemon(thisElement) {
 }
 
 function performSort(t) {
-    toggleMenu('dropdown-menu-sort', 1, 1);
-    documentIsLoading(true);
-    const myTimeout = setTimeout(() => sortPokemon(t), 1);
+    //Clear main div from all cards
+    mainElm.innerHTML = "";
 
+    //Hide the menu
+    toggleMenu('dropdown-menu-sort', 1, 1);
+
+    //Show Loader and start sorting
+    documentIsLoading(true);
+    const myTimeout = setTimeout(() => sortPokemon(t), 5);
 }
 
 function documentIsLoading(bool) {
     let bodyElm = document.body;
     bodyElm.setAttribute('data-loading', bool);
 }
+
+
+function infinitScroll(targetParentElm){
+    let triggerElm = ".pokemon-card:nth-last-child(12)";
+    console.log(triggerElm, targetParentElm)
+    const options = {
+        threshold: 1
+    };
+    
+    const observer = new IntersectionObserver(function checkVisibility(entries){
+        entries.forEach(entry => {
+            if(entry.isIntersecting){
+                /* entry.target.classList.add("observer-element--visible");
+                observer.unobserve(entry.target); */
+                console.log(entry.target)
+            }
+        });
+    }, options)
+
+    const target = targetParentElm.querySelector(triggerElm);
+    observer.observe(target);
+}
+

@@ -30,6 +30,7 @@ const fetchPokemon = () => {
         })).sort((a, b) => a.id > b.id ? 1 : -1);
         populateArray(pokemon);
         documentIsLoading(false);
+        infinitScroll(mainElm);
     })
 };
 
@@ -43,7 +44,6 @@ function populateArray(pokeArray) {
 
 
 function populateGrid(pokeArray) {
-    mainElm.innerHTML = "";
     pokeArray.forEach((pokemon) => {
         mainElm.innerHTML += createCard(pokemon);
     });
@@ -59,7 +59,6 @@ function trackLoadingStatus() {
     var observer = new MutationObserver(function (mutations) {
         mutations.forEach(function (mutation) {
             if (mutation.type === "attributes") {
-                console.log("attributes changed");
 
                 let isLoading = mutation.target.getAttribute("data-loading");
                 isLoading = (isLoading === 'true');
