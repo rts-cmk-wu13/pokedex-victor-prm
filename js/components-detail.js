@@ -186,12 +186,12 @@ function setTypeColorText() {
     return `color: ${mainColor}`;
 }
 
-function styleMeterPseudos(type) {
+function styleMeterPseudos(typeColor) {
  
     const cssString = `
                     meter {
                         background: none; /* Required to get rid of the default background property */
-                        background-color: color-mix(in srgb, var(--color-${type}) 20%, transparent);
+                        background-color: color-mix(in srgb, ${typeColor} 20%, transparent);
                         height: var(--spacing-hlf);
                         border-radius: var(--spacing-dbl);
                         border: none;
@@ -201,7 +201,7 @@ function styleMeterPseudos(type) {
 
                     ::-moz-meter-bar{
                         background: none; /* Required to get rid of the default background property */
-                        background-color: var(--color-${type});
+                        background-color: ${typeColor};
                         border-radius: var(--spacing-dbl);
                     }
 
@@ -211,13 +211,13 @@ function styleMeterPseudos(type) {
 
                     ::-webkit-meter-bar {
                         background: none; /* Required to get rid of the default background property */
-                        background-color: color-mix(in srgb, var(--color-${type}) 20%, transparent);
+                        background-color: color-mix(in srgb, ${typeColor} 20%, transparent);
                         border-radius: var(--spacing-dbl);
                     }
 
                     ::-webkit-meter-optimum-value {
                         background: none; /* Required to get rid of the default background property */
-                        background-color: var(--color-${type});
+                        background-color: ${typeColor};
                         border-radius: var(--spacing-dbl);
                     }
         `

@@ -3,8 +3,14 @@ const pokeID = urlParams.get('id');
 
 let mainColor;
 
-function fetchPokeId() {
+let rootElm = document.querySelector(".detail-wrapper");
+let headerElm = document.createElement("header");
+headerElm.classList.add("header-detail");
+let mainElm = document.createElement("main");
+mainElm.classList.add("detail-card");
+rootElm.append(headerElm, mainElm);
 
+function fetchPokeId() {
     const url = `https://pokeapi.co/api/v2/pokemon/${pokeID}`;
 
     fetch(url)
@@ -41,21 +47,13 @@ function populateDetail(pokemon) {
     console.log(pokemon)
     let type = pokemon.types[0].type.name;
     mainColor = getCSScolor(`--color-${type}`);
-    let rootElm = document.querySelector(".detail-wrapper");
-    let headerElm = document.createElement("header");
-    headerElm.classList.add("header-detail");
-
-    let mainElm = document.createElement("main");
-    mainElm.classList.add("detail-card");
 
     headerElm.innerHTML = populateHeader(pokemon);
     mainElm.innerHTML = populateInfo(pokemon);
 
-    rootElm.append(headerElm, mainElm);
-
     //Post append styles
     document.body.style.backgroundColor = mainColor;
-    styleMeterPseudos(type)
+    styleMeterPseudos(mainColor)
 }
 
 

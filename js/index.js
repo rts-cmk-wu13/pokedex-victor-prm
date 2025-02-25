@@ -10,7 +10,7 @@ loaderElm.classList.add("popover-overlay", "fxrow", "hidden");
 loaderElm.innerHTML = `<div class="loader"><img src="assets/svg/pokeball.svg" alt=""></div>`;
 
 rootElm.append(headerElm, loaderElm, mainElm)
-headerElm.innerHTML += createHeader();
+headerElm.innerHTML = createHeader();
 
 
 
