@@ -92,7 +92,7 @@ button {
     cursor: pointer;
 }
 
-.capitalize{
+.capitalize {
     text-transform: capitalize;
 }
 
@@ -184,6 +184,7 @@ header button {
     justify-self: center;
     width: 60%;
     max-height: 20rem;
+    min-width: 12rem;
     aspect-ratio: 1/1;
     transform: translateY(30%);
 }
@@ -192,6 +193,7 @@ header button {
     width: 100%;
     height: 100%;
     object-fit: contain;
+
 
     opacity: 0;
     animation: fadeIn 1s forwards;
@@ -249,7 +251,7 @@ header button {
     align-items: center;
     gap: var(--spacing-reg);
 
-    > * {
+    >* {
         width: fit-content;
     }
 }
@@ -258,7 +260,7 @@ header button {
     font: var(--text-subtitle-1)
 }
 
-.detail-watermark-container{
+.detail-watermark-container {
     height: 100%;
     width: 100%;
     max-width: 40rem;
@@ -266,7 +268,7 @@ header button {
     justify-content: end;
 }
 
-.detail-watermark{
+.detail-watermark {
     height: 100%;
     opacity: 0.15;
     filter: var(--svg-white);
@@ -289,7 +291,7 @@ header button {
 
 .about-section {
     width: 100%;
-    max-width: 32rem;
+    max-width: 36rem;
     gap: var(--spacing-reg);
 }
 
@@ -300,7 +302,7 @@ header button {
     gap: var(--spacing-hlf);
 }
 
-.about-card > * {
+.about-card>* {
     grid-area: 1 / 1;
 }
 
@@ -329,20 +331,42 @@ header button {
     color: var(--gray-600);
 }
 
-.about-section__flavor-text{
+.about-section__flavor-text {
     text-align: center;
-    font:var(--text-body-3);
+    font: var(--text-body-3);
     color: var(--gray-200);
 }
 
-.about-section__frontback{
+.about-section__frontback {
     gap: var(--spacing-reg);
     height: 4rem;
     justify-content: center;
 }
 
-.about-section__frontback > img{
+.about-section__frontback>img {
     height: 100%;
+}
+
+.stats-list-item {
+    display: grid;
+    grid-template: calc(var(--spacing-reg) * 1.25) / var(--spacing-dbl) auto var(--spacing-dbl) 1fr;
+    align-items: center;
+    gap: var(--spacing-hlf);
+}
+
+.stats-list-item__value {
+    font: var(--text-body-3);
+    text-align: right;
+
+}
+
+.stats-list-item__label {
+    font: var(--text-subtitle-3);
+    text-align: right;
+}
+
+.stats-list-item__bar-graph {
+    width: 100%;
 }
 
 
@@ -359,3 +383,6 @@ header button {
         opacity: 1;
     }
 }
+
+
+ 

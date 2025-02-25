@@ -1,32 +1,41 @@
 const urlParams = new URLSearchParams(window.location.search);
 const pokeID = urlParams.get('id');
 
-const url = `https://pokeapi.co/api/v2/pokemon/${pokeID}`;
-
-fetch(url)
-    .then(res => res.json())
-    .then(pokemon => {
-        // Start fetching the species data in parallel
-        const speciesUrl = pokemon.species.url;
-        return Promise.all([pokemon, fetch(speciesUrl).then(res => res.json())]);
-    })
-    .then(([pokemon, species]) => {
-        // Now you have both pokemon and species data
-        // Get the latest flavor text (in English)
-        let lastIndex = species.flavor_text_entries.map(s => s.language.name === "en").lastIndexOf(true);
-        let mostToDateText = species.flavor_text_entries[lastIndex].flavor_text;
-        // Add the flavor text to the pokemon object (optional, but convenient)
-        pokemon.flavorText = mostToDateText;
-        
-        let japaneseIndex = species.names.map(s => s.language.name === "ja").lastIndexOf(true);
-        let japaneseName = species.names[japaneseIndex].name;
-        pokemon.name_ja = japaneseName;
-        
-        // Now you can pass the combined data to your function
-        populateDetail(pokemon);
-    });
-
 let mainColor;
+
+function fetchPokeId() {
+
+    const url = `https://pokeapi.co/api/v2/pokemon/${pokeID}`;
+
+    fetch(url)
+        .then(res => res.json())
+        .then(pokemon => {
+            // Start fetching the species data in parallel
+            const speciesUrl = pokemon.species.url;
+            return Promise.all([pokemon, fetch(speciesUrl).then(res => res.json())]);
+        })
+        .then(([pokemon, species]) => {
+            // Now you have both pokemon and species data
+            // Get the latest flavor text (in English)
+            let lastIndex = species.flavor_text_entries.map(s => s.language.name === "en").lastIndexOf(true);
+            let mostToDateText = species.flavor_text_entries[lastIndex].flavor_text;
+            // Add the flavor text to the pokemon object (optional, but convenient)
+            pokemon.flavorText = mostToDateText;
+
+            //Get Japanse name too
+            let japaneseIndex = species.names.map(s => s.language.name === "ja").lastIndexOf(true);
+            let japaneseName = species.names[japaneseIndex].name;
+            pokemon.name_ja = japaneseName;
+
+            //Modify the title of document
+            document.title += ` — #${padNumber(pokemon.id)}`;
+            console.log(pokemon.id)
+
+            // Now you can pass the combined data to your function
+            populateDetail(pokemon);
+        });
+}
+
 
 function populateDetail(pokemon) {
     console.log(pokemon)
@@ -43,7 +52,10 @@ function populateDetail(pokemon) {
     mainElm.innerHTML = populateInfo(pokemon);
 
     rootElm.append(headerElm, mainElm);
+
+    //Post append styles
     document.body.style.backgroundColor = mainColor;
+    styleMeterPseudos(type)
 }
 
 function populateHeader(pokemon) {
@@ -77,7 +89,7 @@ function populateInfo(pokemon) {
                    ${createTypePills(pokemon.types)}
                 </section>
                 ${createDetailSection("about", populateAboutSection(pokemon))}
-                ${createDetailSection("base stats")}
+                ${createDetailSection("base stats", populateStatsSection(pokemon.stats))}
             </div>`
 }
 
@@ -118,13 +130,12 @@ function populateAboutSection(pokemon) {
 
         return `<div class="about-card">
                     <div class="about-card__content fxrow">
-                        
                         <div class="about-card__icon-container">
                             <img class="about-card__icon ${rotate}" src="${src}" alt="">
                         </div>
                         <p class="about-card__value" id="about-value">${convertUnit(value)}<span class="about-card__unit">${unit}</span></p>
                     </div>
-                    <label class="about-card__label capitalize" for="about-value">${label}</label>
+                    <p class="about-card__label capitalize" for="about-value">${label}</p>
                 </div>`
     }
 
@@ -142,9 +153,39 @@ function populateAboutSection(pokemon) {
                     <div class="about-card__content">
                         ${createList()}
                     </div>
-                    <label class="about-card__label capitalize" for="about-value">${label}</label>
+                    <p class="about-card__label capitalize" for="about-value">${label}</p>
                 </div>`
     }
+}
+
+function populateStatsSection(stats) {
+    console.log(stats)
+
+    function createStatsListItem(item) {
+        let statName =  item.stat.name;
+        let itemID = `stat-meter__${statName}`;
+        let formattedName = statName.replaceAll("attack","atk").replaceAll("defense","def").replaceAll("special-","s").replaceAll("speed","spd").toUpperCase();
+        //let calculatePercentage = () => Math.round((item.base_stat/255)*100);
+
+        return  `<li class="stats-list-item">
+                    <label class="stats-list-item__label" for="${itemID}" style="${setTypeColorText()}">${formattedName}</label>
+                    ${horizontalDivider()}
+                    <p class="stats-list-item__value">${item.base_stat}</p>
+                    <meter class="stats-list-item__bar-graph" id="${itemID}" value="${item.base_stat}" max="255"></meter>
+                </li>`
+    }
+
+    function createList(){
+        return stats.map(item => createStatsListItem(item)).join("")
+    }
+
+
+    return `<div class="about-section fxcol">
+                <ul class="about-section__stats-list">
+                    ${createList()}
+                </ul>
+            </div>
+            `
 }
 
 function createTypePills(pokeTypes) {
@@ -204,3 +245,46 @@ function setTypeColorText() {
     return `color: ${mainColor}`;
 }
 
+function styleMeterPseudos(type) {
+ 
+    const cssString = `
+                    meter {
+                        background: none; /* Required to get rid of the default background property */
+                        background-color: color-mix(in srgb, var(--color-${type}) 20%, transparent);
+                        height: var(--spacing-hlf);
+                        border-radius: var(--spacing-dbl);
+                        border: none;
+                        box-shadow: inset var(--shadow-2dp);
+                    }
+
+                    ::-moz-meter-bar{
+                        background: none; /* Required to get rid of the default background property */
+                        background-color: var(--color-${type});
+                        border-radius: var(--spacing-dbl);
+                    }
+
+                    ::-webkit-meter-inner-element, ::-webkit-meter-bar{
+                        height: var(--spacing-hlf);
+                    }
+
+                    ::-webkit-meter-bar {
+                        background: none; /* Required to get rid of the default background property */
+                        background-color: color-mix(in srgb, var(--color-${type}) 20%, transparent);
+                        border-radius: var(--spacing-dbl);
+                    }
+
+                    ::-webkit-meter-optimum-value {
+                        background: none; /* Required to get rid of the default background property */
+                        background-color: var(--color-${type});
+                        border-radius: var(--spacing-dbl);
+                    }
+        `
+ 
+    const styleTag = document.createElement("style");
+ 
+    styleTag.innerHTML = cssString;
+    document.head.insertAdjacentElement("beforeend", styleTag)
+}
+
+
+fetchPokeId();

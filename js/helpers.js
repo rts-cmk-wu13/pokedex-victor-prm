@@ -25,8 +25,9 @@ function linkToID(id) {
     return redirect;
 }
 
-function padNumber(id) {
-    let paddedNum = String(id).padStart(3, '0');
+function padNumber(number,padAmount) {
+    let value = padAmount ? padAmount : 3;
+    let paddedNum = String(number).padStart(value, '0');
     return paddedNum
 }
 
@@ -39,12 +40,6 @@ function convertUnit(value) {
     //Height and weight values from the API is measured in decimeters/dekagrams, so here we convert to meters
     return value / 10;
 }
-
-function showLoader(bool) {
-    let modifier = "hidden"
-    bool ? loaderElm.classList.remove(modifier) : loaderElm.classList.add(modifier);
-}
-
 /*     SORT ARRAYS     */
 function sortPokemon(thisElement) {
     let eles = thisElement.getElementsByTagName('input');
@@ -88,29 +83,3 @@ function documentIsLoading(bool) {
     let bodyElm = document.body;
     bodyElm.setAttribute('data-loading', bool);
 }
-
-function trackLoadingStatus() {
-    let bodyElm = document.body;
-    var observer = new MutationObserver(function (mutations) {
-        mutations.forEach(function (mutation) {
-            if (mutation.type === "attributes") {
-                console.log("attributes changed");
-
-                let isLoading = mutation.target.getAttribute("data-loading");
-                isLoading = (isLoading === 'true');
-
-                if (isLoading) {
-                    showLoader(true);
-                } else {
-                    showLoader(false);
-                }
-            }
-        });
-    });
-
-    observer.observe(bodyElm, {
-        attributes: true //configure it to listen to attribute changes
-    });
-}
-
-trackLoadingStatus();

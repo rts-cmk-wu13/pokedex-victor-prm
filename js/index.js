@@ -13,6 +13,7 @@ rootElm.append(headerElm, loaderElm, mainElm)
 headerElm.innerHTML += createHeader();
 
 
+
 const fetchPokemon = () => {
     documentIsLoading(true);
     const promises = [];
@@ -48,4 +49,34 @@ function populateGrid(pokeArray) {
     });
 }
 
+function showLoader(bool) {
+    let modifier = "hidden"
+    bool ? loaderElm.classList.remove(modifier) : loaderElm.classList.add(modifier);
+}
+
+function trackLoadingStatus() {
+    let bodyElm = document.body;
+    var observer = new MutationObserver(function (mutations) {
+        mutations.forEach(function (mutation) {
+            if (mutation.type === "attributes") {
+                console.log("attributes changed");
+
+                let isLoading = mutation.target.getAttribute("data-loading");
+                isLoading = (isLoading === 'true');
+
+                if (isLoading) {
+                    showLoader(true);
+                } else {
+                    showLoader(false);
+                }
+            }
+        });
+    });
+
+    observer.observe(bodyElm, {
+        attributes: true //configure it to listen to attribute changes
+    });
+}
+
+trackLoadingStatus();
 fetchPokemon();
