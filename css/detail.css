@@ -34,6 +34,7 @@
     --gray-700: #b3b3b3;
     --gray-800: #cccccc;
     --gray-900: #e5e5e5;
+    --gray-950: #f2f2f2;
     --gray-1000: #ffffff;
 
     --color-primary: #DC0A2D;
@@ -56,8 +57,9 @@
     --color-steel: #B7B9D0;
     --color-water: #6493EB;
 
-    --black-tint-000: color-mix(in srgb, var(--gray-000) 20%, transparent);
+    --black-tint-000: color-mix(in srgb, var(--gray-000) 15%, transparent);
     --shadow-2dp: 0 1px 3px 1px var(--black-tint-000);
+    --shadow-4dp: 0 2px 6px 2px var(--black-tint-000);
     --shadow-6dp: 0 3px 12px 3px var(--black-tint-000);
 
     --svg-white: invert(100%) sepia(91%) saturate(38%) hue-rotate(321deg) brightness(110%) contrast(110%);
@@ -152,10 +154,10 @@ button {
     justify-content: center;
 
     background-color: var(--gray-1000);
-    box-shadow: inset var(--shadow-2dp);
+    box-shadow: inset var(--shadow-4dp);
 
     &&:hover {
-        box-shadow: var(--shadow-6dp);
+        box-shadow: var(--shadow-4dp);
     }
 
     img {

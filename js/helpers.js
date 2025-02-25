@@ -6,7 +6,7 @@ function colorBackgroundType(selector, type) {
     selector.addEventListener("mouseout", backToNormal);
 
     function backToNormal() {
-        selector.closest("div").style.backgroundColor = 'var(--gray-900)';
+        selector.closest("div").style.backgroundColor = 'var(--gray-950)';
     }
 }
 
