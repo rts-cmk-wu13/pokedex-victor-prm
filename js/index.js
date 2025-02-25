@@ -17,7 +17,7 @@ headerElm.innerHTML = createHeader();
 const fetchPokemon = () => {
     documentIsLoading(true);
     const promises = [];
-    for (let i = 1; i <= 48; i++) {
+    for (let i = 1; i <= 300; i++) {
         const url = `https://pokeapi.co/api/v2/pokemon/${i}`;
         promises.push(fetch(url).then((res) => res.json()));
     }
@@ -30,23 +30,30 @@ const fetchPokemon = () => {
         })).sort((a, b) => a.id > b.id ? 1 : -1);
         populateArray(pokemon);
         documentIsLoading(false);
-        infinitScroll(mainElm);
     })
 };
 
-/*     POPULATE ARRAYS     */
+/*     POPULATE ARRAY     */
 function populateArray(pokeArray) {
     pokeArray.forEach((pokemon) => {
         allpokemon.push(pokemon);
     });
-    populateGrid(allpokemon);
+    populateGrid();
 }
-
-
-function populateGrid(pokeArray) {
-    pokeArray.forEach((pokemon) => {
-        mainElm.innerHTML += createCard(pokemon);
+let offset = 0;
+/*     POPULATE/RENDER GRID     */
+function populateGrid() {
+    let increment =  48;
+    
+    allpokemon.forEach((pokemon, i) => {
+            if(i >= offset && i < offset+increment){
+                mainElm.innerHTML += createCard(pokemon);
+            }
     });
+    offset += increment;
+    console.log(offset)
+    infinitScroll(mainElm);
+    console.log("children:",mainElm.children.length)
 }
 
 function showLoader(bool) {

@@ -60,7 +60,7 @@ function sortPokemon(thisElement) {
     }
 
     //Repopulate the grid
-    populateGrid(allpokemon);
+    populateGrid();
     documentIsLoading(false);
     //Sort functions
     function sortByID() {
@@ -75,7 +75,7 @@ function sortPokemon(thisElement) {
 function performSort(t) {
     //Clear main div from all cards
     mainElm.innerHTML = "";
-
+    offset = 0;
     //Hide the menu
     toggleMenu('dropdown-menu-sort', 1, 1);
 
@@ -92,7 +92,10 @@ function documentIsLoading(bool) {
 
 function infinitScroll(targetParentElm){
     let triggerElm = ".pokemon-card:nth-last-child(12)";
-    console.log(triggerElm, targetParentElm)
+    const targetElm = targetParentElm.querySelector(triggerElm);
+    targetElm.style.backgroundColor = "red";
+    console.log(targetElm)
+    
     const options = {
         threshold: 1
     };
@@ -100,14 +103,17 @@ function infinitScroll(targetParentElm){
     const observer = new IntersectionObserver(function checkVisibility(entries){
         entries.forEach(entry => {
             if(entry.isIntersecting){
-                /* entry.target.classList.add("observer-element--visible");
-                observer.unobserve(entry.target); */
-                console.log(entry.target)
+                console.log(offset)
+                if(offset < 1304){
+                    populateGrid();
+                    observer.unobserve(targetElm);
+                }
+                
             }
         });
     }, options)
 
-    const target = targetParentElm.querySelector(triggerElm);
-    observer.observe(target);
+   
+    observer.observe(targetElm);
 }
 
