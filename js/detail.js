@@ -35,7 +35,6 @@ function fetchPokeId() {
 
             //Modify the title of document
             document.title += ` — #${padNumber(pokemon.id)}`;
-            console.log(pokemon.id)
 
             // Now you can pass the combined data to your function
             populateDetail(pokemon);

@@ -31,6 +31,7 @@ function populateInfo(pokemon) {
                 </section>
                 ${createDetailSection("about", populateAboutSection(pokemon))}
                 ${createDetailSection("base stats", populateStatsSection(pokemon.stats))}
+                ${createDetailSection("appearance", populateAppearanceSection(pokemon))}
             </div>`
 }
 
@@ -100,15 +101,14 @@ function populateAboutSection(pokemon) {
 }
 
 function populateStatsSection(stats) {
-    console.log(stats)
 
     function createStatsListItem(item) {
-        let statName =  item.stat.name;
+        let statName = item.stat.name;
         let itemID = `stat-meter__${statName}`;
-        let formattedName = statName.replaceAll("attack","atk").replaceAll("defense","def").replaceAll("special-","s").replaceAll("speed","spd").toUpperCase();
+        let formattedName = statName.replaceAll("attack", "atk").replaceAll("defense", "def").replaceAll("special-", "s").replaceAll("speed", "spd").toUpperCase();
         //let calculatePercentage = () => Math.round((item.base_stat/255)*100);
 
-        return  `<li class="stats-list-item">
+        return `<li class="stats-list-item">
                     <label class="stats-list-item__label" for="${itemID}" style="${setTypeColorText()}">${formattedName}</label>
                     ${horizontalDivider()}
                     <p class="stats-list-item__value">${item.base_stat}</p>
@@ -116,7 +116,7 @@ function populateStatsSection(stats) {
                 </li>`
     }
 
-    function createList(){
+    function createList() {
         return stats.map(item => createStatsListItem(item)).join("")
     }
 
@@ -160,6 +160,27 @@ function images() {
     `
 }
 
+function populateAppearanceSection(pokemon) {
+
+    return `<div class="appearance-section">
+                    <div class="appearance-section__cry-container fxcol">
+                    <audio controls oncanplay="this.volume = 0.2">
+                        <source src="${pokemon.cries.latest}" type="audio/ogg">
+                        Your browser does not support the audio element.
+                    </audio>
+                    <p class="appearance-section__label capitalize">Cry — Warning! might be kind of loud</p>
+                    </div>
+                    <div class="appearance-section__img-container appearance-section__img-container--front fxcol">
+                        <img src="${pokemon.sprites.other.showdown.front_default}" alt="">
+                        <p class="appearance-section__label capitalize">front</p>
+                    </div>
+                    <div class="appearance-section__img-container appearance-section__img-container--back fxcol">
+                        <img src="${pokemon.sprites.other.showdown.back_default}" alt="">
+                        <p class="appearance-section__label capitalize">Back</p>
+                    </div>
+                </div>`
+}
+
 function changeIndexButton(pokemon, isNext) {
     if ((pokemon.id == 1 && !isNext) || (pokemon.id == 1025 && isNext)) {
         return "";
@@ -187,7 +208,7 @@ function setTypeColorText() {
 }
 
 function styleMeterPseudos(typeColor) {
- 
+
     const cssString = `
                     meter {
                         background: none; /* Required to get rid of the default background property */
@@ -221,9 +242,9 @@ function styleMeterPseudos(typeColor) {
                         border-radius: var(--spacing-dbl);
                     }
         `
- 
+
     const styleTag = document.createElement("style");
- 
+
     styleTag.innerHTML = cssString;
     document.head.insertAdjacentElement("beforeend", styleTag)
 }
