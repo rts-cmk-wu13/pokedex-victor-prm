@@ -1,12 +1,29 @@
 function colorBackgroundType(selector, type) {
     selector.removeEventListener("mouseout", backToNormal);
 
-    let color = `color-mix(in srgb, ${getCSScolor('--color-' + type)} 10%, transparent)`;
-    selector.closest("div").style.backgroundColor = color;
+    //Get elements
+    let cardElm = selector.closest(".pokemon-card");
+    let overlayElm = selector.closest("div");
+    
+    //Get initial colors
+    let initialColorBG = overlayElm.style.backgroundColor;
+    let initialColorBorder = cardElm.style.borderColor;
+
+    //Set hover colors
+    let typeColor = getCSScolor('--color-' + type);
+    let bgColor = `color-mix(in srgb, ${typeColor} 20%, transparent)`;
+
+    //Style the elements according to hover
+    overlayElm.style.backgroundColor = bgColor;
+    cardElm.style.borderColor = typeColor;
+
     selector.addEventListener("mouseout", backToNormal);
 
+    //Reset style on mouse leave
     function backToNormal() {
-        selector.closest("div").style.backgroundColor = 'var(--gray-950)';
+        overlayElm.style.backgroundColor = initialColorBG;
+        cardElm.style.borderColor = initialColorBorder;
+        
     }
 }
 
@@ -93,8 +110,7 @@ function documentIsLoading(bool) {
 function infinitScroll(targetParentElm){
     let triggerElm = ".pokemon-card:nth-last-child(12)";
     const targetElm = targetParentElm.querySelector(triggerElm);
-    targetElm.style.backgroundColor = "red";
-    console.log(targetElm)
+    //targetElm.style.backgroundColor = "red";
     
     const options = {
         threshold: 1
@@ -103,8 +119,8 @@ function infinitScroll(targetParentElm){
     const observer = new IntersectionObserver(function checkVisibility(entries){
         entries.forEach(entry => {
             if(entry.isIntersecting){
-                console.log(offset)
-                if(offset < 1304){
+                //console.log(offset)
+                if(offset <= maxPokeCount){
                     populateGrid();
                     observer.unobserve(targetElm);
                 }

@@ -251,6 +251,8 @@ img[src*="svg"] {
     box-shadow: var(--shadow-2dp);
     overflow: hidden;
     border: 0.1px solid  var(--gray-700);
+
+    transition: 1s border;
 }
 
 .pokemon-card>* {

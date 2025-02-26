@@ -1,4 +1,5 @@
 let allpokemon = [];
+let maxPokeCount = 1025;
 let rootElm = document.querySelector(".content-wrapper");
 let headerElm = document.createElement("header");
 headerElm.classList.add("header-index");
@@ -13,24 +14,32 @@ rootElm.append(headerElm, loaderElm, mainElm)
 headerElm.innerHTML = createHeader();
 
 
-
-const fetchPokemon = () => {
+function fetchPokemon(){
     documentIsLoading(true);
-    const promises = [];
-    for (let i = 1; i <= 300; i++) {
-        const url = `https://pokeapi.co/api/v2/pokemon/${i}`;
-        promises.push(fetch(url).then((res) => res.json()));
-    }
-    Promise.all(promises).then((results) => {
-        const pokemon = results.map((result) => ({
-            name: result.name,
-            image: result.sprites.other['official-artwork'].front_default,
-            type: result.types.map((type) => type.type.name),
-            id: result.id
-        })).sort((a, b) => a.id > b.id ? 1 : -1);
-        populateArray(pokemon);
+
+    let savedArray = getPokeArray();
+
+    if(!savedArray){
+        const promises = [];
+        for (let i = 1; i <= maxPokeCount; i++) {
+            const url = `https://pokeapi.co/api/v2/pokemon/${i}`;
+            promises.push(fetch(url).then((res) => res.json()));
+        }
+        Promise.all(promises).then((results) => {
+            const pokemon = results.map((result) => ({
+                name: result.name,
+                image: result.sprites.other['official-artwork'].front_default,
+                type: result.types.map((type) => type.type.name),
+                id: result.id
+            })).sort((a, b) => a.id > b.id ? 1 : -1);
+            populateArray(pokemon);
+            documentIsLoading(false);
+        })
+    } else{
+        allpokemon = savedArray;
+        populateGrid();
         documentIsLoading(false);
-    })
+    }
 };
 
 /*     POPULATE ARRAY     */
@@ -39,6 +48,8 @@ function populateArray(pokeArray) {
         allpokemon.push(pokemon);
     });
     populateGrid();
+    storePokeArray(allpokemon);
+   
 }
 let offset = 0;
 /*     POPULATE/RENDER GRID     */
@@ -51,7 +62,7 @@ function populateGrid() {
             }
     });
     offset += increment;
-    console.log(offset)
+    //console.log(offset)
     infinitScroll(mainElm);
     console.log("children:",mainElm.children.length)
 }
@@ -82,6 +93,23 @@ function trackLoadingStatus() {
     observer.observe(bodyElm, {
         attributes: true //configure it to listen to attribute changes
     });
+}
+
+function storePokeArray(pokeArray){
+    let storedArray = localStorage.getItem("pokemon");
+    //console.log("Pokemon saved to Local Storage")
+    !storedArray ? localStorage.setItem("pokemon",JSON.stringify(pokeArray)) : null;
+}
+
+function getPokeArray(){
+    let storedArray = JSON.parse(localStorage.getItem("pokemon"));
+    //console.log("Checking if poke array exists:", storedArray ? true: false)
+    
+    let size =  new Blob(Object.values(localStorage)).size;
+    let formatSize = `${(size/(Math.pow(1024, 2))).toFixed(2)+"MB"}`
+    console.log("localstorage size:", formatSize);
+
+    return storedArray ? storedArray : null;
 }
 
 trackLoadingStatus();
