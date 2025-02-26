@@ -94,6 +94,12 @@ function debounce(func, timeout = 300) {
 
 const debounceInput = debounce((val) => handleSearch(val));
 
+//Maybe use this instead of fuzzy search?
+function manualSearch(val){
+    let tempArr = allpokemon.filter(item => item.name.includes(val) || String(item.id).includes(val) || item.type.includes(val))
+    console.log(tempArr); 
+}   
+
 function setSortPreference(v) { localStorage.setItem("sort_preference", v) };
 
 function performSort(t) {
