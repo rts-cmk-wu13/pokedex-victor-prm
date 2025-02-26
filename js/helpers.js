@@ -62,12 +62,16 @@ function convertUnit(value) {
     return value / 10;
 }
 /*     SORT ARRAYS     */
+
 function sortPokemon() {
+    let sortButtonIconElm = document.querySelector(".sort-button-icon");
     let currentSelection = localStorage.getItem('sort_preference') || "NUMBER";
 
     if (currentSelection == "NUMBER") {
+        sortButtonIconElm.src = "./assets/svg/tag.svg"
         sortByID();
     } else {
+         sortButtonIconElm.src = "./assets/svg/text_format.svg"
         sortByName();
     }
 

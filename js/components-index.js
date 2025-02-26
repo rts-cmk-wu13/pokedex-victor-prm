@@ -37,7 +37,7 @@ function createSearchBar() {
 
 function createSortMenu() {
     return `<div class="search-bar__sort-container">
-                <button class="search-bar__sort-button header-button" onclick="toggleMenu('dropdown-menu-sort',1,1)"><img src="./assets/svg/sort.svg" alt=""></button>
+                <button class="search-bar__sort-button header-button" onclick="toggleMenu('dropdown-menu-sort',1,1)"><img class="sort-button-icon" src="./assets/svg/sort.svg" alt=""></button>
                 <dialog class="search-bar__sort-dropdown-container" id="dropdown-menu-sort">
                     <p class="search-bar__sort-dropdown-title">Sort By:</p>
                     <div class="search-bar__sort-dropdown">
@@ -55,9 +55,11 @@ function createSortMenu() {
 function createSortItem(content) {
     let id = content.toLowerCase();
     let value = content.toUpperCase();
+    let userSortPreference = localStorage.getItem('sort_preference') || "NUMBER";
+    let testChecked = userSortPreference == value ? `checked="checked"` : "";
 
     return `<div class="search-bar__sort-dropdown-item">
-                <input type="radio" id="${id}" name="sort-selection" value="${value}" onclick="setSortPreference(value)">
+                <input type="radio" id="${id}" name="sort-selection" value="${value}" onclick="setSortPreference(value)" ${testChecked}>
                 <label for="${id}">${content}</label>
             </div>`
 }
