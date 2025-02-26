@@ -1,13 +1,15 @@
-function colorBackgroundType(selector, type) {
+function cardHoverAnimation(elementClass, type) {
+    let selector = document.querySelector(`.pokemon-card__hidden-link--${elementClass}`);
     selector.removeEventListener("mouseout", backToNormal);
 
     //Get elements
-    let cardElm = selector.closest(".pokemon-card");
-    let overlayElm = selector.closest("div");
+    let cardElm = selector.closest('.pokemon-card');
+    let overlayElm = selector.closest('.pokemon-card__overlay');
+    let imgElm = document.querySelector(`.pokemon-card__image--${elementClass}`)
 
-    //Get initial colors
     let initialColorBG = overlayElm.style.backgroundColor;
     let initialColorBorder = cardElm.style.borderColor;
+    let initialImgWidth = imgElm.style.width;
 
     //Set hover colors
     let typeColor = getCSScolor('--color-' + type);
@@ -16,6 +18,7 @@ function colorBackgroundType(selector, type) {
     //Style the elements according to hover
     overlayElm.style.backgroundColor = bgColor;
     cardElm.style.borderColor = typeColor;
+    imgElm.style.width = "70%";
 
     selector.addEventListener("mouseout", backToNormal);
 
@@ -23,7 +26,7 @@ function colorBackgroundType(selector, type) {
     function backToNormal() {
         overlayElm.style.backgroundColor = initialColorBG;
         cardElm.style.borderColor = initialColorBorder;
-
+        imgElm.style.width = initialImgWidth;
     }
 }
 
@@ -91,7 +94,7 @@ function debounce(func, timeout = 300) {
 
 const debounceInput = debounce((val) => handleSearch(val));
 
-function setSortPreference(v){ localStorage.setItem("sort_preference",v)};
+function setSortPreference(v) { localStorage.setItem("sort_preference", v) };
 
 function performSort(t) {
     resetGrid();
@@ -112,7 +115,7 @@ function removeAnimationBlockers() {
     document.body.removeAttribute("class");
 }
 
-function resetGrid(){
+function resetGrid() {
     //Clear main div from all cards
     mainElm.innerHTML = "";
     offset = 0;
@@ -122,32 +125,31 @@ function resetGrid(){
 
 function infinitScroll(targetParentElm) {
     let itemsInGrid = mainElm.children.length;
-    let nthChild = 1
-    if(itemsInGrid > 12){
-        nthChild = 12;
-    }
-    let triggerElm = `.pokemon-card:nth-last-child(${nthChild})`;
-    const targetElm = targetParentElm.querySelector(triggerElm);
-    //targetElm.style.backgroundColor = "red";
+    let itemThreshold = 24
+    if (itemsInGrid >= itemThreshold) {
+        let triggerElm = `.pokemon-card:nth-last-child(${itemThreshold})`;
+        const targetElm = targetParentElm.querySelector(triggerElm);
+        //targetElm.style.backgroundColor = "red";
 
-     const options = {
-        threshold: 1
-    };
+        const options = {
+            threshold: 1
+        };
 
-    const observer = new IntersectionObserver(function checkVisibility(entries) {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                //console.log(offset)
-                if (offset <= maxPokeCount) {
-                    populateGrid();
-                    observer.unobserve(targetElm);
+        const observer = new IntersectionObserver(function checkVisibility(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    //console.log(offset)
+                    if (offset <= maxPokeCount) {
+                        populateGrid();
+                        observer.unobserve(targetElm);
+                    }
+
                 }
-
-            }
-        });
-    }, options)
+            });
+        }, options)
 
 
-    observer.observe(targetElm);
+        observer.observe(targetElm);
+    }
 }
 

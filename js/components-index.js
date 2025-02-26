@@ -16,11 +16,11 @@ function createCard(pokeData) {
 
     return `<article class="pokemon-card fxcol clickable-card">
                 <p class="pokemon-card__number">#${padNumber(id)}</p>
-                <div class="pokemon-card__overlay fxrow" id="${semiRandomID}">
-                    <p class="pokemon-card__name"><a class="pokemon-card__hidden-link" href="${linkToID(id)}" onmouseover="colorBackgroundType(this, '${pokeData.type}')">${pokeData.name}</a></p>
+                <div class="pokemon-card__overlay fxrow">
+                    <p class="pokemon-card__name"><a class="pokemon-card__hidden-link pokemon-card__hidden-link--${semiRandomID}" href="${linkToID(id)}" onmouseover="cardHoverAnimation('${semiRandomID}', '${pokeData.type}')">${pokeData.name}</a></p>
                 </div>
                 <div class="pokemon-card__image-container fxrow">
-                    <img class="pokemon-card__image "src="${pokeData.image}" alt="" loading="lazy">
+                    <img class="pokemon-card__image pokemon-card__image--${semiRandomID}"src="${pokeData.image}" alt="" loading="lazy">
                 </div>
             </article>`
 }

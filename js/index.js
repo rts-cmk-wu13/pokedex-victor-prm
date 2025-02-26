@@ -58,7 +58,7 @@ function populateArray(pokeArray) {
 let offset = 0;
 /*     POPULATE/RENDER GRID     */
 function populateGrid() {
-    let increment = 48;
+    let increment = 96;
     //console.log(allpokemon)
     allpokemon.forEach((pokemon, i) => {
         if (i >= offset && i < offset + increment) {
@@ -117,7 +117,7 @@ function getPokeArray() {
 }
 
 function handleSearch(searchTerm) {
-    console.log(searchTerm)
+    //console.log(searchTerm)
     allpokemon = getPokeArray();
     if (searchTerm.length >= 2) {
 
@@ -157,9 +157,7 @@ function handleSearch(searchTerm) {
     }
 
     //Clear main div from all cards
-    resetGrid();
-    populateGrid();
-   
+    resetGrid();   
 }
 
 trackLoadingStatus();
