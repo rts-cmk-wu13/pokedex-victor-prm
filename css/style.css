@@ -250,7 +250,7 @@ img[src*="svg"] {
     border-radius: var(--spacing-hlf);
     box-shadow: var(--shadow-2dp);
     overflow: hidden;
-    border: 0.1px solid  var(--gray-700);
+    border: 0.1px solid  var(--gray-800);
 
     transition: 1s border;
 }
@@ -275,6 +275,7 @@ img[src*="svg"] {
 
 .pokemon-card__name {
     text-transform: capitalize;
+    text-align: center;
     font: var(--text-body-3);
     color: var(--gray-200);
 }
@@ -436,3 +437,12 @@ img[src*="svg"] {
 
 /*     MEDIA QUERIES     */
 @media only screen and (max-width: 40rem) {}
+
+
+.skipInitialTransition * {
+    -webkit-transition: none !important;
+    -moz-transition: none !important;
+    -ms-transition: none !important;
+    -o-transition: none !important;
+     transition: none !important;
+  }

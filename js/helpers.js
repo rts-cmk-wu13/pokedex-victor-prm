@@ -4,7 +4,7 @@ function colorBackgroundType(selector, type) {
     //Get elements
     let cardElm = selector.closest(".pokemon-card");
     let overlayElm = selector.closest("div");
-    
+
     //Get initial colors
     let initialColorBG = overlayElm.style.backgroundColor;
     let initialColorBorder = cardElm.style.borderColor;
@@ -23,7 +23,7 @@ function colorBackgroundType(selector, type) {
     function backToNormal() {
         overlayElm.style.backgroundColor = initialColorBG;
         cardElm.style.borderColor = initialColorBorder;
-        
+
     }
 }
 
@@ -35,6 +35,7 @@ function getCSScolor(varName) {
 
 function clearSearchBar(id) {
     document.querySelector("#" + id).value = "";
+    debounceInput(document.querySelector("#" + id).value);
 }
 
 function linkToID(id) {
@@ -42,7 +43,7 @@ function linkToID(id) {
     return redirect;
 }
 
-function padNumber(number,padAmount) {
+function padNumber(number, padAmount) {
     let value = padAmount ? padAmount : 3;
     let paddedNum = String(number).padStart(value, '0');
     return paddedNum
@@ -58,17 +59,8 @@ function convertUnit(value) {
     return value / 10;
 }
 /*     SORT ARRAYS     */
-function sortPokemon(thisElement) {
-    let eles = thisElement.getElementsByTagName('input');
-    let currentSelection;
-
-    //Find the current value of the radio button group
-    for (i = 0; i < eles.length; i++) {
-        if (eles[i].type = "radio")
-            if (eles[i].checked) {
-                currentSelection = eles[i].value;
-            }
-    }
+function sortPokemon() {
+    let currentSelection = localStorage.getItem('sort_preference') || "NUMBER";
 
     if (currentSelection == "NUMBER") {
         sortByID();
@@ -89,16 +81,26 @@ function sortPokemon(thisElement) {
     }
 }
 
+function debounce(func, timeout = 300) {
+    let timer;
+    return (...args) => {
+        clearTimeout(timer);
+        timer = setTimeout(() => { func.apply(this, args); }, timeout);
+    };
+}
+
+const debounceInput = debounce((val) => handleSearch(val));
+
+function setSortPreference(v){ localStorage.setItem("sort_preference",v)};
+
 function performSort(t) {
-    //Clear main div from all cards
-    mainElm.innerHTML = "";
-    offset = 0;
+    resetGrid();
     //Hide the menu
     toggleMenu('dropdown-menu-sort', 1, 1);
 
     //Show Loader and start sorting
     documentIsLoading(true);
-    const myTimeout = setTimeout(() => sortPokemon(t), 5);
+    const myTimeout = setTimeout(() => sortPokemon(), 5);
 }
 
 function documentIsLoading(bool) {
@@ -106,30 +108,46 @@ function documentIsLoading(bool) {
     bodyElm.setAttribute('data-loading', bool);
 }
 
+function removeAnimationBlockers() {
+    document.body.removeAttribute("class");
+}
 
-function infinitScroll(targetParentElm){
-    let triggerElm = ".pokemon-card:nth-last-child(12)";
+function resetGrid(){
+    //Clear main div from all cards
+    mainElm.innerHTML = "";
+    offset = 0;
+    sortPokemon();
+}
+
+
+function infinitScroll(targetParentElm) {
+    let itemsInGrid = mainElm.children.length;
+    let nthChild = 1
+    if(itemsInGrid > 12){
+        nthChild = 12;
+    }
+    let triggerElm = `.pokemon-card:nth-last-child(${nthChild})`;
     const targetElm = targetParentElm.querySelector(triggerElm);
     //targetElm.style.backgroundColor = "red";
-    
-    const options = {
+
+     const options = {
         threshold: 1
     };
-    
-    const observer = new IntersectionObserver(function checkVisibility(entries){
+
+    const observer = new IntersectionObserver(function checkVisibility(entries) {
         entries.forEach(entry => {
-            if(entry.isIntersecting){
+            if (entry.isIntersecting) {
                 //console.log(offset)
-                if(offset <= maxPokeCount){
+                if (offset <= maxPokeCount) {
                     populateGrid();
                     observer.unobserve(targetElm);
                 }
-                
+
             }
         });
     }, options)
 
-   
+
     observer.observe(targetElm);
 }
 

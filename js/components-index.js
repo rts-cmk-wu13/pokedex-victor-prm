@@ -12,12 +12,12 @@ function createHeader() {
 
 function createCard(pokeData) {
     let id = pokeData.id;
-    let semiRandomID = id + pokeData.type[0];
+    let semiRandomID = id + pokeData.type;
 
     return `<article class="pokemon-card fxcol clickable-card">
                 <p class="pokemon-card__number">#${padNumber(id)}</p>
                 <div class="pokemon-card__overlay fxrow" id="${semiRandomID}">
-                    <p class="pokemon-card__name"><a class="pokemon-card__hidden-link" href="${linkToID(id)}" onmouseover="colorBackgroundType(this, '${pokeData.type[0]}')">${pokeData.name}</a></p>
+                    <p class="pokemon-card__name"><a class="pokemon-card__hidden-link" href="${linkToID(id)}" onmouseover="colorBackgroundType(this, '${pokeData.type}')">${pokeData.name}</a></p>
                 </div>
                 <div class="pokemon-card__image-container fxrow">
                     <img class="pokemon-card__image "src="${pokeData.image}" alt="" loading="lazy">
@@ -28,7 +28,7 @@ function createCard(pokeData) {
 function createSearchBar() {
     return `<div class="search-bar-container fxrow">
                 <img class="search-bar__search-icon" src="./assets/svg/search.svg" alt="Search Icon">
-                <input class="search-bar" type="search" name="" id="search-bar">
+                <input class="search-bar" type="search" name="" id="search-bar" oninput="debounceInput(this.value)">
                 <button class="search-bar__delete-button header-button button-transparent" onclick="clearSearchBar('search-bar')"><img src="./assets/svg/close.svg" alt=""></button>
             </div>`
 }
@@ -50,11 +50,14 @@ function createSortMenu() {
             </div>`
 }
 
+
+
 function createSortItem(content) {
     let id = content.toLowerCase();
     let value = content.toUpperCase();
+
     return `<div class="search-bar__sort-dropdown-item">
-                <input type="radio" id="${id}" name="sort-selection" value="${value}">
+                <input type="radio" id="${id}" name="sort-selection" value="${value}" onclick="setSortPreference(value)">
                 <label for="${id}">${content}</label>
             </div>`
 }
