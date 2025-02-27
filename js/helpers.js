@@ -71,7 +71,7 @@ function sortPokemon() {
         sortButtonIconElm.src = "./assets/svg/tag.svg"
         sortByID();
     } else {
-         sortButtonIconElm.src = "./assets/svg/text_format.svg"
+        sortButtonIconElm.src = "./assets/svg/text_format.svg"
         sortByName();
     }
 
@@ -99,10 +99,10 @@ function debounce(func, timeout = 300) {
 const debounceInput = debounce((val) => handleSearch(val));
 
 //Maybe use this instead of fuzzy search?
-function manualSearch(val){
+function manualSearch(val) {
     let tempArr = allpokemon.filter(item => item.name.includes(val) || String(item.id).includes(val) || item.type.includes(val))
-    console.log(tempArr); 
-}   
+    console.log(tempArr);
+}
 
 function setSortPreference(v) { localStorage.setItem("sort_preference", v) };
 
@@ -130,6 +130,26 @@ function resetGrid() {
     mainElm.innerHTML = "";
     offset = 0;
     sortPokemon();
+}
+
+function setStylePreference(value) {
+    console.log(value)
+    let preference = value ? "3d" : "2d";
+    localStorage.setItem("style_preference", preference);
+
+    let text2dElm = document.querySelector(".search-bar__toggle-switch-text--2d");
+    let text3dElm = document.querySelector(".search-bar__toggle-switch-text--3d");
+
+    if (value == true) {
+        text2dElm.classList.remove("search-bar__toggle-switch-text--selected");
+        text3dElm.classList.add("search-bar__toggle-switch-text--selected");
+    } else {
+        text2dElm.classList.add("search-bar__toggle-switch-text--selected");
+        text3dElm.classList.remove("search-bar__toggle-switch-text--selected");
+    }
+
+
+    //document.querySelector(".search-bar__toggle-switch-text p").style.color ="black"
 }
 
 
