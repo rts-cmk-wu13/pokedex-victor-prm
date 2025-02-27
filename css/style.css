@@ -118,7 +118,7 @@ button {
 .standard-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(var(--grid-item-size), 1fr));
-    grid-template-rows: repeat(auto-fill, minmax(var(--grid-item-size), 1fr));
+    /*  Seems to bug on Firefox grid-template-rows: repeat(auto-fill, minmax(var(--grid-item-size)));*/
     gap: var(--spacing-reg);
 }
 
@@ -338,7 +338,7 @@ img[src*="svg"] {
     justify-content: center;
     align-items: center;
     z-index: 1;
-    background-color: var(--black-tint-000);
+    background-color: color-mix(in srgb, var(--color-primary) 5%, transparent);
     backdrop-filter: blur(4px);
 }
 
