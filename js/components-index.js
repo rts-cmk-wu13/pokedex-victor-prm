@@ -13,6 +13,10 @@ function createHeader() {
 function createCard(pokeData) {
     let id = pokeData.id;
     let semiRandomID = id + pokeData.type;
+    let imgSource;
+    //Make an if-statement here later
+    imgSource = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/${pokeData.images[0]}/${id}.png`
+ 
 
     return `<article class="pokemon-card fxcol clickable-card">
                 <p class="pokemon-card__number">#${padNumber(id)}</p>
@@ -20,7 +24,7 @@ function createCard(pokeData) {
                     <p class="pokemon-card__name"><a class="pokemon-card__hidden-link pokemon-card__hidden-link--${semiRandomID}" href="${linkToID(id)}" onmouseover="cardHoverAnimation('${semiRandomID}', '${pokeData.type}')">${pokeData.name}</a></p>
                 </div>
                 <div class="pokemon-card__image-container fxrow">
-                    <img class="pokemon-card__image pokemon-card__image--${semiRandomID}"src="${pokeData.image}" alt="" loading="lazy">
+                    <img class="pokemon-card__image pokemon-card__image--${semiRandomID}"src="${imgSource}" alt="" loading="lazy">
                 </div>
             </article>`
 }

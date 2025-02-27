@@ -188,7 +188,7 @@ header button {
     max-height: 20rem;
     min-width: 12rem;
     aspect-ratio: 1/1;
-    transform: translateY(30%);
+    transform: translateY(5.5rem);
 }
 
 .detail-image-pokemon {
