@@ -272,6 +272,7 @@ img[src*="svg"] {
 .pokemon-card__image {
     width: 60%;
     transition: all 0.33s;
+    opacity: 0;
 }
 
 .pokemon-card__name {
@@ -507,6 +508,17 @@ img[src*="svg"] {
 
 /*     MEDIA QUERIES     */
 @media only screen and (max-width: 40rem) {}
+
+
+.img-loaded{
+    animation: fadeIn 1s forwards;
+}
+
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+    }
+}
 
 
 .skipInitialTransition * {
