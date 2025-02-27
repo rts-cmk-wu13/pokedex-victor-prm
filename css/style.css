@@ -247,13 +247,14 @@ img[src*="svg"] {
 /*     CARD     */
 .pokemon-card {
     display: grid;
+    aspect-ratio: 1 / 1;
     background-color: var(--gray-1000);
     border-radius: var(--spacing-hlf);
     box-shadow: var(--shadow-2dp);
     overflow: hidden;
     border: 0.1px solid var(--gray-800);
-
     transition: 0.66s border;
+   
 }
 
 .pokemon-card>* {
