@@ -133,7 +133,6 @@ function resetGrid() {
 }
 
 function setStylePreference(value) {
-    console.log(value)
     let preference = value ? "3d" : "2d";
     localStorage.setItem("style_preference", preference);
 
@@ -148,8 +147,21 @@ function setStylePreference(value) {
         text3dElm.classList.remove("search-bar__toggle-switch-text--selected");
     }
 
+    resetGrid();
+}
 
-    //document.querySelector(".search-bar__toggle-switch-text p").style.color ="black"
+function handleStylePreference(pokeData){
+    let imgSource;
+    let userStylePreference = localStorage.getItem('style_preference') || "2d";
+    //Make an if-statement here later
+    if(userStylePreference === "3d"){
+        userStylePreference = "home";
+    }else{
+        userStylePreference = "official-artwork";
+    }
+
+    imgSource = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/${userStylePreference}/${pokeData.id}.png`
+    return imgSource;
 }
 
 

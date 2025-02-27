@@ -1,5 +1,7 @@
 
 function populateHeader(pokemon) {
+    let imgSource = handleStylePreference(pokemon);
+
     return `<div class="detail-top fxrow">
                 <div class="detail-top__back-button">
                     <button class="header-button button-transparent" onclick="navigateToPage('index.html')"><img src="./assets/svg/arrow_back.svg" alt="Back arrow icon"></button>
@@ -18,7 +20,7 @@ function populateHeader(pokemon) {
                     ${changeIndexButton(pokemon, true)}
             </div>
             <div class="detail-image-container">
-                <img class="detail-image-pokemon" src="${pokemon.sprites.other['official-artwork'].front_default}" alt="Image of the pokemon name ${pokemon.name}">
+                <img class="detail-image-pokemon" src="${imgSource}" alt="Image of the pokemon name ${pokemon.name}">
             </div>`
 }
 

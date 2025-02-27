@@ -14,9 +14,7 @@ function createHeader() {
 function createCard(pokeData) {
     let id = pokeData.id;
     let semiRandomID = id + pokeData.type;
-    let imgSource;
-    //Make an if-statement here later
-    imgSource = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/${pokeData.images[0]}/${id}.png`
+    let imgSource = handleStylePreference(pokeData);
  
 
     return `<article class="pokemon-card fxcol clickable-card">

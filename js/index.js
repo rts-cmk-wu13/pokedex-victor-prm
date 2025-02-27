@@ -28,7 +28,6 @@ function fetchPokemon() {
         Promise.all(promises).then((results) => {
             const pokemon = results.map((result) => ({
                 name: result.name,
-                images:['official-artwork','home'],
                 /* image: result.sprites.other['official-artwork'].front_default, */
                 /* type: result.types.map((type) => type.type[0].name), */
                 type: result.types[0].type.name,
