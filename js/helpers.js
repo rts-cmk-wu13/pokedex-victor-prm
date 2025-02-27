@@ -164,8 +164,12 @@ function handleStylePreference(pokeData){
     return imgSource;
 }
 
+function imageFadeIn(elm){
+    elm.classList.add("img-loaded")
+}
 
-function infinitScroll(targetParentElm) {
+
+function infiniteScroll(targetParentElm) {
     let itemsInGrid = mainElm.children.length;
     let itemThreshold = 24
     if (itemsInGrid >= itemThreshold) {

@@ -23,7 +23,7 @@ function createCard(pokeData) {
                     <p class="pokemon-card__name"><a class="pokemon-card__hidden-link pokemon-card__hidden-link--${semiRandomID}" href="${linkToID(id)}" onmouseover="cardHoverAnimation('${semiRandomID}', '${pokeData.type}')">${pokeData.name}</a></p>
                 </div>
                 <div class="pokemon-card__image-container fxrow">
-                    <img class="pokemon-card__image pokemon-card__image--${semiRandomID}"src="${imgSource}" alt="" loading="lazy">
+                    <img class="pokemon-card__image pokemon-card__image--${semiRandomID}"src="${imgSource}" alt="" loading="lazy" onload="imageFadeIn(this)">
                 </div>
             </article>`
 }

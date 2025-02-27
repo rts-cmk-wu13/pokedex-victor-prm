@@ -198,7 +198,7 @@ header button {
 
 
     opacity: 0;
-    animation: fadeIn 1s forwards;
+    animation: fadeIn 0.33s forwards;
 }
 
 .detail-top {
@@ -436,6 +436,8 @@ audio {
 
 
 
+
+
 /*     MEDIA QUERIES     */
 @media only screen and (max-width: 40rem) {}
 
@@ -448,3 +450,4 @@ audio {
         opacity: 1;
     }
 }
+

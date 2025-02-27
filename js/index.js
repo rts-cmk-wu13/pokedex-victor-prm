@@ -67,7 +67,7 @@ function populateGrid() {
     });
     offset += increment;
     //console.log(offset)
-    infinitScroll(mainElm);
+    infiniteScroll(mainElm);
     console.log("children:", mainElm.children.length)
 }
 
