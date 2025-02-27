@@ -146,41 +146,36 @@ function horizontalDivider() {
     return `<div class="horizontal-divider"></div>`
 }
 
-function images() {
-    `<img class="detail-image-pokemon" src="${pokemon.sprites.other['dream_world'].front_default}" alt="Image of the pokemon name ${pokemon.name}">
-    <img class="detail-image-pokemon" src="${pokemon.sprites.other['home'].front_default}" alt="Image of the pokemon name ${pokemon.name}"></img>
-    <img class="detail-main-image" src="${pokemon.sprites.other.showdown.front_default}" alt="">
-    <img class="detail-main-image" src="${pokemon.sprites.other.showdown.back_default}" alt="">
-    
-    
-    
-    
-    <div class="about-section__frontback fxrow">
-                    <img class="about-section__front" src="${pokemon.sprites.other.showdown.front_default}" alt="">
-                    <img class="about-section__front" src="${pokemon.sprites.other.showdown.back_default}" alt="">
-    </div>
-    `
-}
-
 function populateAppearanceSection(pokemon) {
 
     return `<div class="appearance-section">
                     <div class="appearance-section__cry-container fxcol">
-                    <audio controls oncanplay="this.volume = 0.2">
-                        <source src="${pokemon.cries.latest}" type="audio/ogg">
-                        Your browser does not support the audio element.
-                    </audio>
-                    <p class="appearance-section__label capitalize">Cry — Warning! might be kind of loud</p>
+                        <audio controls oncanplay="this.volume = 0.2">
+                            <source src="${pokemon.cries.latest}" type="audio/ogg">
+                            Your browser does not support the audio element.
+                            </audio>
+                        <p class="appearance-section__label capitalize">Cry — Warning! might be kind of loud</p>
                     </div>
-                    <div class="appearance-section__img-container appearance-section__img-container--front fxcol">
-                        <img src="${pokemon.sprites.other.showdown.front_default}" alt="">
-                        <p class="appearance-section__label capitalize">front</p>
-                    </div>
-                    <div class="appearance-section__img-container appearance-section__img-container--back fxcol">
-                        <img src="${pokemon.sprites.other.showdown.back_default}" alt="">
-                        <p class="appearance-section__label capitalize">Back</p>
-                    </div>
+                    ${insertFrontBackGifs(pokemon)}
                 </div>`
+}
+
+function insertFrontBackGifs(pokemon) {
+    console.log(pokemon.sprites.other.showdown.back_default);
+    if (!pokemon.sprites.other.showdown.back_default || !pokemon.sprites.other.showdown.back_default) {
+        return ""
+    }
+
+    return `<div class="appearance-section__img-container appearance-section__img-container--front fxcol">
+                <img src="${pokemon.sprites.other.showdown.front_default}" alt="">
+                <p class="appearance-section__label capitalize">front</p>
+            </div>
+            <div class="appearance-section__img-container appearance-section__img-container--back fxcol">
+                <img src="${pokemon.sprites.other.showdown.back_default}" alt="">
+                <p class="appearance-section__label capitalize">Back</p>
+            </div>`
+
+
 }
 
 function changeIndexButton(pokemon, isNext) {

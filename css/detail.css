@@ -382,11 +382,11 @@ header button {
     width: 100%;
     max-width: 14rem;
     grid-template-columns: 1fr [au] 1fr;
-    grid-template-rows: 5rem 4rem;
+    grid-template-rows: 4rem 5rem;
     gap: var(--spacing-hlf);
     grid-template-areas:
-        "front back"
-        "audio audio";
+        "audio audio"
+        "front back";
 
 }
 
@@ -430,7 +430,7 @@ header button {
 }
 
 audio {
-    width: 80%;
+    width: 85%;
     height: 2rem;
 }
 
