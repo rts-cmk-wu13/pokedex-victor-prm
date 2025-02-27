@@ -143,7 +143,8 @@ button {
 }
 
 .header-logo {
-    padding: 0.125rem;
+    padding-left: 0.125rem;
+
     *> {
         height: 1.5rem;
     }
@@ -238,7 +239,7 @@ img[src*="svg"] {
     }
 }
 
-.button-transparent{
+.button-transparent {
     background-color: transparent;
     box-shadow: none
 }
@@ -250,7 +251,7 @@ img[src*="svg"] {
     border-radius: var(--spacing-hlf);
     box-shadow: var(--shadow-2dp);
     overflow: hidden;
-    border: 0.1px solid  var(--gray-800);
+    border: 0.1px solid var(--gray-800);
 
     transition: 0.66s border;
 }
@@ -414,6 +415,75 @@ img[src*="svg"] {
     padding: var(--spacing-hlf) var(--spacing-reg);
 }
 
+
+/** Switch
+   -------------------------------------*/
+
+.search-bar__toggle-switch-container {
+    margin-left: auto;
+    height: 2rem;
+    width: 2rem;
+    justify-content: space-between;
+}
+
+.search-bar__toggle-switch-component {
+    height: 1rem;
+    :hover {
+        cursor: pointer;
+    }
+}
+.search-bar__toggle-switch-text-container {
+    padding: 0 0.1rem;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.search-bar__toggle-switch-text {
+    color: var(--gray-1000);
+}
+
+.search-bar__toggle-switch-text--2d, .search-bar__toggle-switch-text--3d{
+    font: var(--text-body-3);
+}
+
+.search-bar__toggle-switch-text--selected{
+    font: var(--text-subtitle-3);
+}
+
+.search-bar__toggle-checkbox {
+    height: var(--spacing-reg);
+    position: absolute;
+    opacity: 0;
+}
+
+.search-bar__toggle-switch {
+    display: inline-flex;
+    height: 100%;
+    width: var(--spacing-dbl);
+    background: var(--gray-1000);
+    box-shadow: inset var(--shadow-4dp);
+    border-radius: 1em;
+}
+
+.search-bar__toggle-switch-indicator {
+    height: 100%;
+    width: var(--spacing-reg);
+    border-radius: var(--spacing-reg);
+    background: #FFF;
+    box-shadow: var(--shadow-2dp);
+    -webkit-transition: all 300ms;
+    -moz-transition: all 300ms;
+    transition: all 300ms;
+}
+
+.search-bar__toggle-checkbox:checked+.search-bar__toggle-switch-indicator {
+    -webkit-transform: translate3d(100%, 0, 0);
+    -moz-transform: translate3d(100%, 0, 0);
+    transform: translate3d(100%, 0, 0);
+}
+
+
+
 /* Safari */
 @-webkit-keyframes spin {
     0% {
@@ -444,5 +514,5 @@ img[src*="svg"] {
     -moz-transition: none !important;
     -ms-transition: none !important;
     -o-transition: none !important;
-     transition: none !important;
-  }
+    transition: none !important;
+}

@@ -2,6 +2,7 @@ function createHeader() {
     return `<div class="header-logo fxrow">
                 <img class="header-logo__pokeball" src="./assets/svg/pokeball.svg" alt="Pokeball Logo">
                 <h1 class="header-logo__title">Pokedex</h1>
+                ${createStyleToggle()}
             </div>
             <nav class="search-and-sort fxrow">
                 ${createSearchBar()}
@@ -13,6 +14,8 @@ function createHeader() {
 function createCard(pokeData) {
     let id = pokeData.id;
     let semiRandomID = id + pokeData.type;
+    let imgSource = handleStylePreference(pokeData);
+ 
 
     return `<article class="pokemon-card fxcol clickable-card">
                 <p class="pokemon-card__number">#${padNumber(id)}</p>
@@ -20,7 +23,7 @@ function createCard(pokeData) {
                     <p class="pokemon-card__name"><a class="pokemon-card__hidden-link pokemon-card__hidden-link--${semiRandomID}" href="${linkToID(id)}" onmouseover="cardHoverAnimation('${semiRandomID}', '${pokeData.type}')">${pokeData.name}</a></p>
                 </div>
                 <div class="pokemon-card__image-container fxrow">
-                    <img class="pokemon-card__image pokemon-card__image--${semiRandomID}"src="${pokeData.image}" alt="" loading="lazy">
+                    <img class="pokemon-card__image pokemon-card__image--${semiRandomID}"src="${imgSource}" alt="" loading="lazy">
                 </div>
             </article>`
 }
@@ -50,8 +53,6 @@ function createSortMenu() {
             </div>`
 }
 
-
-
 function createSortItem(content) {
     let id = content.toLowerCase();
     let value = content.toUpperCase();
@@ -62,6 +63,26 @@ function createSortItem(content) {
                 <input type="radio" id="${id}" name="sort-selection" value="${value}" onclick="setSortPreference(value)" ${testChecked}>
                 <label for="${id}">${content}</label>
             </div>`
+}
+
+// <div class="search-bar__toggle-switch-text-container fxrow"><p class="search-bar__toggle-switch-text">2D</p><p class="search-bar__toggle-switch-text">3D</p></div>
+
+function createStyleToggle(){
+    let userStylePreference = localStorage.getItem('style_preference') || "2d";
+    let testChecked = userStylePreference == "3d" ? `checked="checked"` : "";
+    let select2d = userStylePreference == "2d" ? `search-bar__toggle-switch-text--selected` : "";
+    let select3d = userStylePreference == "3d" ? `search-bar__toggle-switch-text--selected` : "";
+    
+
+    return  `   <div class="search-bar__toggle-switch-container fxcol">
+                    <div class="search-bar__toggle-switch-text-container fxrow"><p class="search-bar__toggle-switch-text--2d ${select2d}">2D</p><p class="search-bar__toggle-switch-text--3d ${select3d}">3D</p></div>
+                    <div class="search-bar__toggle-switch-component">
+                        <label class="search-bar__toggle-switch">
+                            <input class="search-bar__toggle-checkbox" onclick="setStylePreference(this.checked)" type="checkbox" ${testChecked}/>
+                            <div class="search-bar__toggle-switch-indicator"></div>
+                        </label>
+                    </div>
+                </div>`
 }
 
 function toggleMenu(targetID, isModal, isDismissable) {
