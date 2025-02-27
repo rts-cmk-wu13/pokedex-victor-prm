@@ -313,6 +313,7 @@ img[src*="svg"] {
     a::before {
         content: "";
         position: absolute;
+        z-index: 100;
         inset: 0;
     }
 }
